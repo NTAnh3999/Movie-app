@@ -1,0 +1,23 @@
+@import "../../assets/mixins.scss";
+.card-container {
+    @include grid-columns(4);
+    justify-items: center;
+
+    margin: 3rem 0;
+}
+
+@include respond(large) {
+    .card-container {
+        @include grid-columns(3);
+    }
+}
+@include respond(small) {
+    .card-container {
+        @include grid-columns(2);
+    }
+}
+@include respond(X-small) {
+    .card-container {
+        @include grid-columns(1);
+    }
+}

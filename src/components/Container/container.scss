@@ -1,0 +1,29 @@
+@import "../../assets/mixins.scss";
+.container {
+    max-width: 105rem;
+    height: inherit;
+    margin: 0 auto;
+}
+@include respond(large) {
+    .container {
+        max-width: 95rem;
+        margin: 0 auto;
+    }
+}
+@include respond(medium) {
+    .container {
+        max-width: 73rem;
+    }
+}
+@include respond(small) {
+    .container {
+        max-width: 50rem;
+        margin: 0 auto;
+    }
+}
+@include respond(X-small) {
+    .container {
+        max-width: 30rem;
+        margin: 0 auto;
+    }
+}
