@@ -11,18 +11,15 @@ const SearchResult = () => {
     useEffect(() => {
         if (!query) return;
         fetch(
-            `https://api.themoviedb.org/3/search/movie?api_key=${
-                process.env.REACT_APP_API_KEY
-            }&query=${query ? `${query}` : ""}`
+            `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${query}`
         )
             .then((response) => response.json())
             .then((data) => {
                 dispath({ type: "GET_SEARCH_RESULTS", payload: data.results });
-            })
-            .catch((err) => <NotFound err={err} />);
+            });
     }, [query]);
     if (state.movieLists.length === 0) {
-        return <LoadingSpinner />;
+        return <NotFound message={"Search not found"} />;
     } else {
         return (
             <CardContainer>

@@ -14,7 +14,11 @@ const NavBar = () => {
     }
     function submitHandle(e) {
         e.preventDefault();
-        navigate(`/search/${query}`);
+        if (!query) {
+            navigate("/");
+        } else {
+            navigate(`/search/${query}`);
+        }
     }
     const inputHandle = function (e) {
         query = e.target.value;
