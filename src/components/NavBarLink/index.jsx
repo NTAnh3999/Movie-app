@@ -1,10 +1,10 @@
 import React from "react";
 import "./navlink.scss";
 import { useContext } from "react";
-import { GlobalContext } from "../../context/GlobalState";
+import { GlobalContext } from "../../context/GlobalContext";
 import { NavLink } from "react-router-dom";
 const NavBarLink = () => {
-    const [state, dispath] = useContext(GlobalContext);
+    const { state, dispath } = useContext(GlobalContext);
 
     return (
         <div className="nav-link-container">

@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from "react";
-import { GlobalContext } from "../context/GlobalState";
+import { GlobalContext } from "../context/GlobalContext";
 import CardContainer from "../components/CardContainer";
 import MovieCard from "../components/MovieCard";
 
 const TopRated = () => {
-    const [state, dispath] = useContext(GlobalContext);
+    const { state, dispath } = useContext(GlobalContext);
 
     useEffect(() => {
         async function getMovies() {

@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from "react";
-import { GlobalContext } from "../context/GlobalState";
+import { GlobalContext } from "../context/GlobalContext";
 import MovieCard from "../components/MovieCard";
 import CardContainer from "../components/CardContainer";
 import LoadingSpinner from "../components/LoadingSpinner";
 const Popular = () => {
-    const [state, dispath] = useContext(GlobalContext);
+    const { state, dispath } = useContext(GlobalContext);
 
     useEffect(() => {
         async function getMovies() {
