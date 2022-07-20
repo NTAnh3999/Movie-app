@@ -1,36 +1,39 @@
-@import "../../assets/colors.scss";
-@import "../../assets/mixins.scss";
-
 .nav-container-fluid {
     width: 100%;
     height: 6rem;
-    background-color: #353e73;
+    background-color: $dark-blue-color;
+
+    @include respond(X-small) {
+        height: 10rem;
+    }
 }
 .nav-bar {
-    width: inherit;
-    height: inherit;
+    height: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 
-    user-select: none;
-
-    .logo a {
+    .logo {
+        display: inline-block;
         color: $pink-color;
         text-decoration: none;
         font-size: 2.8rem;
     }
     .search-box {
-        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        flex: 0 0 40%;
+
         input {
-            width: 25rem;
-            height: 3.5rem;
+            width: 100%;
             border-radius: 2rem;
+            outline: none;
             background-color: transparent;
             border: 1px solid $pink-color;
-            outline: none;
+
             color: $pink-color;
-            padding-left: 1rem;
+            padding: 0.8rem 1.5rem;
 
             &::placeholder {
                 color: $pink-color;
@@ -39,12 +42,11 @@
             }
         }
         .search-btn {
-            position: absolute;
-            top: calc(50% - 0.9rem);
-            right: 1.5rem;
             background-color: transparent;
             border: none;
             outline: none;
+            margin-left: -3.2rem;
+
             i {
                 font-size: 1.8rem;
                 cursor: pointer;
@@ -62,17 +64,24 @@
             }
         }
     }
-    @include respond(large) {
+    @include respond(small) {
         .bars-menu {
             display: flex;
-
-            margin: 0 2rem;
-        }
-        .logo {
-            margin: 0 2rem;
         }
         .nav-link {
             display: none;
+        }
+    }
+    @include respond(X-small) {
+        flex-wrap: wrap;
+
+        .bar-menu {
+            display: flex;
+            margin: 0;
+        }
+        .search-box {
+            order: 1;
+            flex-basis: 100%;
         }
     }
 }
@@ -106,7 +115,7 @@
 
         li {
             padding: 2rem;
-            color: #353e73;
+            color: $dark-blue-color;
         }
     }
 }

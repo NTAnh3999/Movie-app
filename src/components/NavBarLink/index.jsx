@@ -1,5 +1,3 @@
-import React from "react";
-import "./navlink.scss";
 import { useContext } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 import { NavLink } from "react-router-dom";
@@ -24,7 +22,7 @@ const NavBarLink = () => {
                 </li>
                 <li>
                     <NavLink
-                        to="top-rated"
+                        to="/top-rated"
                         onClick={() =>
                             dispath({
                                 type: "GET_TOP_RATED",

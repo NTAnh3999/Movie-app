@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import MovieCard from "../components/MovieCard";
 import CardContainer from "../components/CardContainer";

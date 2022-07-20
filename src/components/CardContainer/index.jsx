@@ -1,7 +1,4 @@
-import React from "react";
 import Container from "../Container";
-
-import "./cardcontainer.scss";
 
 const CardContainer = ({ children }) => {
     return (

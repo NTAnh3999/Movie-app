@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import CardContainer from "../components/CardContainer";
 import MovieCard from "../components/MovieCard";
-
+import LoadingSpinner from "../components/LoadingSpinner";
 const TopRated = () => {
     const { state, dispath } = useContext(GlobalContext);
 
@@ -17,22 +17,26 @@ const TopRated = () => {
         }
         getMovies();
     }, []);
-    return (
-        <CardContainer>
-            {state.movieLists.map((movie) => {
-                return (
-                    <MovieCard
-                        key={movie.id}
-                        id={movie.id}
-                        title={movie.title}
-                        image={movie.poster_path}
-                        releaseDate={movie.release_date}
-                        voteAverage={movie.vote_average}
-                    />
-                );
-            })}
-        </CardContainer>
-    );
+    if (state.movieLists.length === 0) {
+        return <LoadingSpinner />;
+    } else {
+        return (
+            <CardContainer>
+                {state.movieLists.map((movie) => {
+                    return (
+                        <MovieCard
+                            key={movie.id}
+                            id={movie.id}
+                            title={movie.title}
+                            image={movie.poster_path}
+                            releaseDate={movie.release_date}
+                            voteAverage={movie.vote_average}
+                        />
+                    );
+                })}
+            </CardContainer>
+        );
+    }
 };
 
 export default TopRated;

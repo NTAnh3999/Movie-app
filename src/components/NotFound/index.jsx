@@ -1,5 +1,3 @@
-import React from "react";
-import "./notfound.scss";
 import Container from "../Container";
 import { Link } from "react-router-dom";
 const NotFound = ({ message }) => {

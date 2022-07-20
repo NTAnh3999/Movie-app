@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from "react";
 import { GlobalContext } from "../context/GlobalContext";
-import LoadingSpinner from "../components/LoadingSpinner";
 import CardContainer from "../components/CardContainer";
 import MovieCard from "../components/MovieCard";
 import NotFound from "../components/NotFound";

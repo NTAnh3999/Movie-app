@@ -10,9 +10,9 @@ function App() {
     return (
         <Routes>
             <Route path="/" element={<NavBar />}>
+                <Route index element={<Popular />} />
                 <Route path="search" element={<SearchResult />} />
                 <Route path="search/:query" element={<SearchResult />} />
-                <Route index element={<Popular />} />
                 <Route path="top-rated" element={<TopRated />} />
                 <Route
                     path="*"

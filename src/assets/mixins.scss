@@ -1,26 +1,26 @@
 @mixin respond($breakpoint) {
     @if $breakpoint == "X-small" {
-        @media (max-width: 575px) {
+        @media (max-width: 36em) {
             @content;
         }
     }
     @if $breakpoint == "small" {
-        @media (max-width: 768px) {
+        @media (max-width: 48em) {
             @content;
         }
     }
     @if $breakpoint == "medium" {
-        @media (max-width: 992px) {
+        @media (max-width: 62em) {
             @content;
         }
     }
     @if $breakpoint == "large" {
-        @media (max-width: 1200px) {
+        @media (max-width: 75em) {
             @content;
         }
     }
     @if $breakpoint == "extra-large" {
-        @media (max-width: 1400px) {
+        @media (min-width: 87.5em) {
             @content;
         }
     }
