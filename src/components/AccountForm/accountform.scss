@@ -1,0 +1,130 @@
+.form-container {
+    width: 100vw;
+    height: 100vh;
+    padding: 2rem;
+    background-image: linear-gradient(
+        to right bottom,
+        rgba($color-primary-light, 0.5),
+        rgba($color-primary-dark, 1)
+    );
+    position: relative;
+}
+.form {
+    width: 38vw;
+    height: 75vh;
+    background-color: rgba(#111, 0.3);
+    border-radius: 0.8rem;
+    box-shadow: 0.2rem 0.4rem 0.5rem rgba(#000, 0.15);
+
+    transform: translate(-50%, -30%);
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    overflow: hidden;
+    &__title {
+        text-align: center;
+    }
+}
+.form-login,
+.form-signup {
+    padding: 0 4rem;
+}
+
+.heading-2 {
+    font-size: 4.2rem;
+    font-weight: 500;
+    letter-spacing: 0.5rem;
+    // border-bottom: 4px solid $color-secondary-dark;
+    color: $color-white;
+}
+
+.btn {
+    font-size: 1.8rem;
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.btn.active {
+    color: rgba($color-primary-light, 0.5);
+    &::after {
+        transform: scale(1);
+    }
+}
+
+.btn-full-width:hover {
+    transform: translatey(-4px);
+    box-shadow: 0 4px rgba(#000, 0.05);
+}
+.btn-full-width {
+    display: block;
+    width: 100%;
+    margin: 1.5rem 0;
+    background-color: $color-secondary-dark;
+    color: $color-white;
+    text-transform: uppercase;
+}
+.btn-full-width:hover {
+    background-color: $color-white;
+    color: $color-secondary-light;
+}
+
+.btn--link:link,
+.btn--link:visited {
+    text-decoration: none;
+    color: $color-white;
+    font-size: 1.6rem;
+}
+.btn--link:hover {
+    color: rgba($color-secondary-light, 0.8);
+}
+
+.divide-login {
+    display: grid;
+    grid-template-columns: 1fr min-content 1fr;
+    color: $color-white;
+    align-items: center;
+    column-gap: 1rem;
+    margin: 2rem 0;
+}
+.divide-login::before,
+.divide-login::after {
+    content: "";
+    height: 1px;
+    background-color: $color-white;
+}
+.btn--underline {
+    background: none;
+    color: $color-white;
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+    &::after {
+        content: "";
+        display: inline-block;
+        width: 100%;
+        transform: scale(0);
+        height: 0.4rem;
+        background-color: rgba($color-secondary-dark, 1);
+        transition: all 0.3s ease-in;
+        transform-origin: center;
+    }
+    &:hover::after {
+        transform: scale(1);
+    }
+    &:hover {
+        color: rgba($color-primary-light, 0.5);
+    }
+}
+.btn-group {
+    display: flex;
+    justify-content: space-around;
+}
+.btn-google {
+    background-color: #ea4335;
+    color: $color-white;
+}
+.btn-facebook {
+    background-color: #365899;
+    color: $color-white;
+}

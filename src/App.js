@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import TopRated from "./pages/TopRated";
 import Trending from "./pages/Trending";
 import SearchResult from "./pages/SearchResult";
+import Account from "./pages/Account";
 import NotFound from "./components/NotFound";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
                     element={<NotFound message={"Page not found"} />}
                 />
             </Route>
+            <Route path="account" element={<Account />} />
         </Routes>
     );
 }

@@ -1,0 +1,33 @@
+.form {
+    &__group {
+        margin-top: 2.5rem;
+    }
+    &__label,
+    &__input,
+    &__input::placeholder {
+        color: $color-white;
+        font-size: 2rem;
+    }
+    &__label {
+        text-transform: capitalize;
+        display: inline-block;
+        transform: translate(1rem, -4.5rem);
+        user-select: none;
+        transition: all 0.3s;
+    }
+    &__input {
+        display: block;
+        width: 100%;
+        padding: 0.5rem 1rem;
+        margin: 1.5rem 0;
+        background-color: transparent;
+        border: none;
+        border-bottom: 2px solid $color-secondary-dark;
+    }
+    &__input:focus {
+        outline: none;
+    }
+    &__input:focus ~ &__label {
+        transform: translate(0, -6.8rem);
+    }
+}
