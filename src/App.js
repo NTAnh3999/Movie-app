@@ -2,7 +2,9 @@ import "./App.scss";
 import NavBar from "./components/NavBar";
 import { Routes, Route } from "react-router-dom";
 import Popular from "./pages/Popular";
+import Home from "./pages/Home";
 import TopRated from "./pages/TopRated";
+import Trending from "./pages/Trending";
 import SearchResult from "./pages/SearchResult";
 import NotFound from "./components/NotFound";
 
@@ -10,8 +12,9 @@ function App() {
     return (
         <Routes>
             <Route path="/" element={<NavBar />}>
-                <Route index element={<Popular />} />
-                <Route path="search" element={<SearchResult />} />
+                <Route index element={<Home />} />
+                <Route path="trending" element={<Trending />} />
+                <Route path="popular" element={<Popular />} />
                 <Route path="search/:query" element={<SearchResult />} />
                 <Route path="top-rated" element={<TopRated />} />
                 <Route

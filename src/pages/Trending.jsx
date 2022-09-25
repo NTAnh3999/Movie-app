@@ -3,23 +3,23 @@ import { MovieContext } from "../context/MovieContext";
 import MovieCard from "../components/MovieCard";
 import CardContainer from "../components/CardContainer";
 import LoadingSpinner from "../components/LoadingSpinner";
-import { POPULAR_ACTION } from "../config";
+import { TRENDING_ACTION } from "../config";
 
-const Popular = () => {
+const Trending = () => {
     const movieContext = useContext(MovieContext);
 
     console.log(movieContext);
     const { movies, getData } = movieContext;
     useEffect(() => {
-        getData(POPULAR_ACTION);
+        getData(TRENDING_ACTION);
     }, []);
 
     if (movies.length === 0) {
         return <LoadingSpinner />;
     } else {
         return (
-            <CardContainer title="Popular movie">
-                {movies?.popular?.map((movie) => {
+            <CardContainer title="Trending movie">
+                {movies?.trending?.map((movie) => {
                     return (
                         <MovieCard
                             key={movie.id}
@@ -36,4 +36,4 @@ const Popular = () => {
     }
 };
 
-export default Popular;
+export default Trending;

@@ -1,5 +1,6 @@
 .not-found-container {
-    color: $pink-color;
+    grid-column: full-start / full-end;
+    color: $color-secondary;
     font-size: 3rem;
     text-align: center;
     margin-top: 3rem;

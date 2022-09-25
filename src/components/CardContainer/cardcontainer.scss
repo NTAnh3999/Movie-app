@@ -1,15 +1,31 @@
 .card-container {
-    @include grid-columns(4);
-    justify-items: center;
-    margin: 3rem 0;
-
-    @include respond(large) {
-        @include grid-columns(3);
-    }
+    grid-column: 2 / 3;
+    margin: 2rem 0;
     @include respond(small) {
-        @include grid-columns(2);
+        margin: 1.5rem;
     }
-    @include respond(X-small) {
-        @include grid-columns(1);
+    @include respond(medium) {
+        grid-column: 1 / -1;
+        margin: 1rem;
+        padding: 2rem;
+    }
+
+    .section-title {
+        @include section-title;
+    }
+    .card-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
+        gap: 3.5rem 2.5rem;
+        padding: 1.5rem;
+
+        @include respond(medium) {
+            gap: 2.5rem 1.5rem;
+            padding: 0;
+        }
+        @include respond(small) {
+            grid-template-columns: 1fr;
+            gap: 5.5rem 0;
+        }
     }
 }

@@ -1,33 +1,84 @@
 @mixin respond($breakpoint) {
     @if $breakpoint == "X-small" {
+        // less than 576px
         @media (max-width: 36em) {
             @content;
         }
     }
     @if $breakpoint == "small" {
+        // 576px - 768px
         @media (max-width: 48em) {
             @content;
         }
     }
     @if $breakpoint == "medium" {
+        // 768px - 992px
         @media (max-width: 62em) {
             @content;
         }
     }
     @if $breakpoint == "large" {
+        // 992px - 1200px
         @media (max-width: 75em) {
             @content;
         }
     }
     @if $breakpoint == "extra-large" {
-        @media (min-width: 87.5em) {
+        // 1200px and up
+        @media (min-width: 75em) {
             @content;
         }
     }
 }
 
-@mixin grid-columns($num) {
-    display: grid;
-    grid-gap: 4rem 1rem;
-    grid-template-columns: repeat($num, 1fr);
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+}
+@mixin flex-row {
+    display: flex;
+    flex-direction: row;
+}
+@mixin hidden-item {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+}
+@mixin section-title {
+    color: $color-primary-light;
+    font-size: 2.8rem;
+    padding-bottom: 1.5rem;
+}
+@mixin visible-item {
+    opacity: 1;
+    visibility: visible;
+}
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@mixin navbar-tooltip {
+    position: absolute;
+    left: 11rem;
+    transform: translateX(50%);
+    background-color: $color-white;
+    padding: 0.5rem;
+    border-radius: 6px;
+    z-index: 10;
+
+    font-size: 2rem;
+    white-space: nowrap;
+    color: rgba($color-secondary-light, 0.8);
+
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+@mixin navbar-tooltip-hidden {
+    visibility: hidden;
+    opacity: 0;
+}
+@mixin navbar-tooltip-visible {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
 }

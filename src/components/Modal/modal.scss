@@ -1,0 +1,103 @@
+.modal {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.8);
+
+    &__content {
+        display: flex;
+        color: #fff;
+        background-color: $color-primary-dark;
+        border-radius: 2rem;
+        overflow: hidden;
+
+        width: 80vw;
+        height: 80vh;
+        position: absolute;
+        top: 40%;
+        left: 40%;
+        transform: translate(-40%, -40%);
+        @include respond(medium) {
+            width: 90vw;
+        }
+    }
+    &__right {
+        display: flex;
+        flex-direction: column;
+        padding: 0 1rem;
+        overflow-y: auto;
+    }
+    &__close {
+        background: none;
+        border: none;
+        font-size: 3rem;
+        font-weight: 400;
+        align-self: end;
+        color: $color-purple-light;
+        margin-top: 0.2rem;
+        margin-right: 0.8rem;
+        cursor: pointer;
+        @include respond(medium) {
+            font-size: 2.5rem;
+        }
+    }
+    &__close:hover {
+        color: $color-secondary-light;
+    }
+    &__heading {
+        color: $color-secondary;
+        font-size: 3.6rem;
+        letter-spacing: 1px;
+        @include respond(medium) {
+            font-size: 2.8rem;
+            letter-spacing: normal;
+        }
+    }
+    &__movie-info {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: 1rem 0;
+        width: 95%;
+
+        .movie-info__details {
+            width: 40%;
+            line-height: 1.5;
+
+            &--title {
+                color: $color-white;
+                font-size: 1.8rem;
+            }
+            &--desc {
+                color: $color-purple-light;
+                font-size: 1.5rem;
+            }
+            &--vote-average {
+                display: inline-block;
+                padding: 0.6rem 0.4rem;
+                border-radius: 1rem;
+                font-size: 1.3rem;
+                background-color: $color-secondary-dark;
+            }
+        }
+    }
+    &__overview {
+        margin-top: 1rem;
+
+        &--title {
+            font-size: 2.8rem;
+            color: $color-primary-light;
+        }
+        &--paragraph {
+            font-size: 1.6rem;
+        }
+    }
+    &__poster {
+        width: 75vh;
+        height: 100%;
+    }
+}

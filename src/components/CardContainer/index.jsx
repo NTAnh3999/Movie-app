@@ -1,10 +1,9 @@
-import Container from "../Container";
-
-const CardContainer = ({ children }) => {
+const CardContainer = ({ children, title }) => {
     return (
-        <Container>
-            <div className="card-container">{children}</div>
-        </Container>
+        <section className="card-container">
+            <h3 className="section-title">{title}</h3>
+            <div className="card-list">{children}</div>
+        </section>
     );
 };
 

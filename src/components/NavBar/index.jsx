@@ -1,76 +1,80 @@
-import { useState } from "react";
-import Container from "../Container";
-import NavBarLink from "../NavBarLink";
-import { Link, useNavigate, Outlet } from "react-router-dom";
-
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
+import SearchBox from "../SearchBox";
+import { Link, Outlet, NavLink } from "react-router-dom";
+import userAvatar from "../../assets/realtor-1.jpeg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faArrowTrendUp,
+    faCrown,
+    faClapperboard,
+    faFire,
+    faStar,
+    faUser,
+} from "@fortawesome/free-solid-svg-icons";
 const NavBar = () => {
-    const [displaySidebar, setDisplaySidebar] = useState(false);
-
-    const navigate = useNavigate();
-    let query;
-    function setDisplaySidebarHandle() {
-        setDisplaySidebar(!displaySidebar);
-    }
-    function submitHandle(e) {
-        e.preventDefault();
-        if (!query) {
-            navigate("/");
-        } else {
-            navigate(`/search/${query}`);
-        }
-    }
-    const inputHandle = function (e) {
-        query = e.target.value;
-        // dispath({ type: "GET_SEARCH_QUERY", query: inputValue });
-    };
+    const userContext = useContext(UserContext);
 
     return (
         <>
-            <nav className="nav-container-fluid">
-                <Container>
-                    <div className="nav-bar">
-                        <Link className="logo" to="/">
-                            MovieApp
+            <nav className="nav-container">
+                <div className="nav-bar">
+                    <Link className="logo-box" to="/">
+                        <span className="logo">
+                            <FontAwesomeIcon icon={faCrown} />
+                            <FontAwesomeIcon icon={faClapperboard} />
+                        </span>
+                    </Link>
+                    <ul className="nav-list">
+                        <li>
+                            <NavLink className="nav-link" to="/top-rated">
+                                <span className="icon">
+                                    <FontAwesomeIcon icon={faStar} />
+                                </span>
+                                <span className="title">Top rated</span>
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink className="nav-link" to="/popular">
+                                <span className="icon">
+                                    <FontAwesomeIcon icon={faFire} />
+                                </span>
+                                <span className="title">Popular</span>
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink className="nav-link" to="/trending">
+                                <span className="icon">
+                                    <FontAwesomeIcon icon={faArrowTrendUp} />
+                                </span>
+                                <span className="title">Trending</span>
+                            </NavLink>
+                        </li>
+                    </ul>
+                    {userContext ? (
+                        <Link to="/account" className="account">
+                            <FontAwesomeIcon icon={faUser} />
+                            <span className="title">Account</span>
                         </Link>
-
-                        <NavBarLink />
-                        <form className="search-box" onSubmit={submitHandle}>
-                            <input
-                                id="search-input"
-                                placeholder="Search for movies..."
-                                value={query}
-                                onChange={inputHandle}
+                    ) : (
+                        <div className="user">
+                            <img
+                                src={userAvatar}
+                                alt="User"
+                                className="avatar"
                             />
-                            <button className="search-btn" type="submit">
-                                <i className="fa-solid fa-magnifying-glass"></i>
-                            </button>
-                        </form>
-                        <div
-                            className="bars-menu"
-                            onClick={setDisplaySidebarHandle}
-                        >
-                            <i
-                                className={`fa-solid ${
-                                    displaySidebar ? "fa-x" : "fa-bars"
-                                }`}
-                            ></i>
+                            <span className="user-info">
+                                <ul>
+                                    <li>Thông tin tài khoản</li>
+                                    <li>Danh sách đã lưu</li>
+                                    <li>Đăng xuất</li>
+                                </ul>
+                            </span>
                         </div>
-                    </div>
-                </Container>
-            </nav>
-
-            <div
-                className="sidebar overlay"
-                style={{
-                    width: displaySidebar ? "30vw" : "0",
-                }}
-            >
-                <div className="close-btn" onClick={setDisplaySidebarHandle}>
-                    <i className="fa-solid fa-x"></i>
+                    )}
                 </div>
-                <NavBarLink />
-            </div>
-
+            </nav>
+            <SearchBox />
             <Outlet />
         </>
     );

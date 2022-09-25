@@ -1,40 +1,39 @@
 import React, { useContext, useEffect } from "react";
-import { GlobalContext } from "../context/GlobalContext";
+import { MovieContext } from "../context/MovieContext";
 import CardContainer from "../components/CardContainer";
 import MovieCard from "../components/MovieCard";
 import NotFound from "../components/NotFound";
 import { useParams } from "react-router-dom";
 const SearchResult = () => {
-    const { state, dispath } = useContext(GlobalContext);
+    const { movies, getSearchData } = useContext(MovieContext);
     const { query } = useParams();
     useEffect(() => {
-        if (!query) return;
-        fetch(
-            `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${query}`
-        )
-            .then((response) => response.json())
-            .then((data) => {
-                dispath({ type: "GET_SEARCH_RESULTS", payload: data.results });
-            });
+        (async () => {
+            await getSearchData(query);
+        })();
     }, [query]);
-    if (state.movieLists.length === 0) {
+    if (movies?.searchResults?.length === 0) {
         return <NotFound message={"Search not found"} />;
     } else {
         return (
-            <CardContainer>
-                {state.movieLists.map((movie) => {
-                    return (
-                        <MovieCard
-                            key={movie.id}
-                            id={movie.id}
-                            title={movie.title}
-                            image={movie.poster_path}
-                            releaseDate={movie.release_date}
-                            voteAverage={movie.vote_average}
-                        />
-                    );
-                })}
-            </CardContainer>
+            <>
+                <CardContainer
+                    title={`Found ${movies?.searchResults?.length} results for '${query}' keyword`}
+                >
+                    {movies?.searchResults?.map((movie) => {
+                        return (
+                            <MovieCard
+                                key={movie.id}
+                                id={movie.id}
+                                title={movie.title}
+                                image={movie.poster_path}
+                                releaseDate={movie.release_date}
+                                voteAverage={movie.vote_average}
+                            />
+                        );
+                    })}
+                </CardContainer>
+            </>
         );
     }
 };

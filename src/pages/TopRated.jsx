@@ -1,28 +1,21 @@
 import React, { useContext, useEffect } from "react";
-import { GlobalContext } from "../context/GlobalContext";
+import { MovieContext } from "../context/MovieContext";
 import CardContainer from "../components/CardContainer";
 import MovieCard from "../components/MovieCard";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { TOP_RATED_ACTION } from "../config";
 const TopRated = () => {
-    const { state, dispath } = useContext(GlobalContext);
+    const { movies, getData } = useContext(MovieContext);
 
     useEffect(() => {
-        async function getMovies() {
-            const response = await fetch(
-                `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_API_KEY}`
-            );
-            const data = await response.json();
-
-            dispath({ type: "GET_TOP_RATED", payload: data.results });
-        }
-        getMovies();
+        getData(TOP_RATED_ACTION);
     }, []);
-    if (state.movieLists.length === 0) {
+    if (movies.length === 0) {
         return <LoadingSpinner />;
     } else {
         return (
-            <CardContainer>
-                {state.movieLists.map((movie) => {
+            <CardContainer title={"Top rated movie"}>
+                {movies?.top_rated?.map((movie) => {
                     return (
                         <MovieCard
                             key={movie.id}
