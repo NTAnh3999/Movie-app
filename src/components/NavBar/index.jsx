@@ -2,8 +2,9 @@ import { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 import SearchBox from "../SearchBox";
 import { Link, Outlet, NavLink } from "react-router-dom";
-import userAvatar from "../../assets/realtor-1.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { SignOutUser } from "../../firebase";
+
 import {
     faArrowTrendUp,
     faCrown,
@@ -14,7 +15,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 const NavBar = () => {
     const userContext = useContext(UserContext);
-
+    const { currentUser } = userContext;
     return (
         <>
             <nav className="nav-container">
@@ -51,26 +52,36 @@ const NavBar = () => {
                             </NavLink>
                         </li>
                     </ul>
-                    {userContext ? (
-                        <Link to="/account" className="account">
-                            <FontAwesomeIcon icon={faUser} />
-                            <span className="title">Account</span>
-                        </Link>
-                    ) : (
+                    {currentUser ? (
                         <div className="user">
                             <img
-                                src={userAvatar}
+                                src={currentUser.photoURL}
                                 alt="User"
                                 className="avatar"
                             />
                             <span className="user-info">
                                 <ul>
-                                    <li>Thông tin tài khoản</li>
-                                    <li>Danh sách đã lưu</li>
-                                    <li>Đăng xuất</li>
+                                    <li>
+                                        <Link to="/account-info">
+                                            Account information
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/wishlist">Wishlist</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/" onClick={SignOutUser}>
+                                            Sign Out
+                                        </Link>
+                                    </li>
                                 </ul>
                             </span>
                         </div>
+                    ) : (
+                        <Link to="/account" className="account">
+                            <FontAwesomeIcon icon={faUser} />
+                            <span className="title">Account</span>
+                        </Link>
                     )}
                 </div>
             </nav>

@@ -90,7 +90,7 @@
         }
         &:hover .user-info {
             @include navbar-tooltip-visible;
-            transform: translate(-2rem, 1.2rem);
+            transform: translate(11rem, 1.2rem);
         }
     }
 

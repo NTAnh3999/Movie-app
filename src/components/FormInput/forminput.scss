@@ -30,4 +30,7 @@
     &__input:focus ~ &__label {
         transform: translate(0, -6.8rem);
     }
+    .shrink {
+        transform: translate(0, -6.8rem);
+    }
 }

@@ -9,7 +9,6 @@ import { POPULAR_ACTION, TOP_RATED_ACTION, TRENDING_ACTION } from "../config";
 const Home = () => {
     const movieContext = useContext(MovieContext);
 
-    console.log(movieContext);
     const { movies, getData } = movieContext;
     useEffect(() => {
         (async () => {
@@ -20,7 +19,6 @@ const Home = () => {
             ]);
         })();
     }, []);
-    console.log(movies);
     if (movies.length === 0) {
         return <LoadingSpinner />;
     } else {

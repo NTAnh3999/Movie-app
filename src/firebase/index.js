@@ -1,7 +1,15 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
-import { googleAuthProvider } from "firebase/auth";
+import { getFirestore, setDoc, doc, getDoc } from "firebase/firestore/lite";
+import {
+    GoogleAuthProvider,
+    getAuth,
+    signInWithPopup,
+    onAuthStateChanged,
+    signOut,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+} from "firebase/auth";
 // Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyACJfo3rRfemNnloG7VuKBa3bqnBZpAelI",
@@ -16,8 +24,54 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const provider = new googleAuthProvider();
+export const googleProvider = new GoogleAuthProvider();
 
-provider.setCustomParameters({
+googleProvider.setCustomParameters({
     login_hints: "user@example.com",
+    prompt: "select_account",
 });
+const auth = getAuth(app);
+export const loginWithGooglePopup = function () {
+    return signInWithPopup(auth, googleProvider);
+};
+
+export const SignOutUser = async () => await signOut(auth);
+
+export const onAuthStateChangedListener = (callback) =>
+    onAuthStateChanged(auth, callback);
+export const createAuthUserFromEmailAndPassword = async (email, password) => {
+    if (!email || !password) {
+        alert("Email and password are required");
+        return;
+    }
+    return await createUserWithEmailAndPassword(auth, email, password);
+};
+
+export const loginAuthUserWithEmailAndPassword = async (email, password) => {
+    if (!email || !password) {
+        alert("Email and password are required");
+        return;
+    }
+    return await signInWithEmailAndPassword(auth, email, password);
+};
+
+export const createUserDocumentFromAuth = async (userAuth, displayName) => {
+    const userDocRef = doc(db, "users", userAuth.uid);
+
+    const userSnapshot = await getDoc(userDocRef);
+    if (!userSnapshot.exists()) {
+        const { email } = userAuth;
+        const createdAt = new Date();
+
+        try {
+            await setDoc(userDocRef, {
+                displayName,
+                email,
+                createdAt,
+            });
+        } catch (err) {
+            console.log("fail to create user", err);
+        }
+    }
+    return userDocRef;
+};
