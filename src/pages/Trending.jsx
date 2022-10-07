@@ -1,39 +1,27 @@
 import { useContext, useEffect } from "react";
 import { MovieContext } from "../context/MovieContext";
-import MovieCard from "../components/MovieCard";
 import CardContainer from "../components/CardContainer";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { TRENDING_ACTION } from "../config";
+import { CATEGORY_TRENDING } from "../config";
+import CardList from "../components/CardList";
+import Section from "../components/Section";
+import Pagination from "../components/Pagination";
 
 const Trending = () => {
     const movieContext = useContext(MovieContext);
 
-    console.log(movieContext);
-    const { movies, getData } = movieContext;
+    const { movies, getMovieData, pageCount, currentPage } = movieContext;
     useEffect(() => {
-        getData(TRENDING_ACTION);
-    }, []);
+        getMovieData(CATEGORY_TRENDING);
+    }, [currentPage]);
 
-    if (movies.length === 0) {
-        return <LoadingSpinner />;
-    } else {
-        return (
+    return (
+        <Section>
             <CardContainer title="Trending movie">
-                {movies?.trending?.map((movie) => {
-                    return (
-                        <MovieCard
-                            key={movie.id}
-                            id={movie.id}
-                            title={movie.title}
-                            image={movie.poster_path}
-                            releaseDate={movie.release_date}
-                            voteAverage={movie.vote_average}
-                        />
-                    );
-                })}
+                <CardList data={movies?.trending} />
             </CardContainer>
-        );
-    }
+            <Pagination totalPages={pageCount} />
+        </Section>
+    );
 };
 
 export default Trending;

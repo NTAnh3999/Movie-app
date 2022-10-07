@@ -1,39 +1,27 @@
 import { useContext, useEffect } from "react";
 import { MovieContext } from "../context/MovieContext";
-import MovieCard from "../components/MovieCard";
+import CardList from "../components/CardList";
 import CardContainer from "../components/CardContainer";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { POPULAR_ACTION } from "../config";
+import { CATEGORY_POPULAR } from "../config";
+import Pagination from "../components/Pagination";
+import Section from "../components/Section";
 
 const Popular = () => {
     const movieContext = useContext(MovieContext);
 
-    console.log(movieContext);
-    const { movies, getData } = movieContext;
+    const { movies, getMovieData, pageCount, currentPage } = movieContext;
     useEffect(() => {
-        getData(POPULAR_ACTION);
-    }, []);
+        getMovieData(CATEGORY_POPULAR);
+    }, [currentPage]);
 
-    if (movies.length === 0) {
-        return <LoadingSpinner />;
-    } else {
-        return (
+    return (
+        <Section>
             <CardContainer title="Popular movie">
-                {movies?.popular?.map((movie) => {
-                    return (
-                        <MovieCard
-                            key={movie.id}
-                            id={movie.id}
-                            title={movie.title}
-                            image={movie.poster_path}
-                            releaseDate={movie.release_date}
-                            voteAverage={movie.vote_average}
-                        />
-                    );
-                })}
+                <CardList data={movies?.popular} />
             </CardContainer>
-        );
-    }
+            <Pagination totalPages={pageCount} />
+        </Section>
+    );
 };
 
 export default Popular;

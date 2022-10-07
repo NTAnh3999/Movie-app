@@ -9,52 +9,54 @@ import {
 export const MovieContext = createContext({
     movies: {},
     setMovies: () => {},
+    currentPage: 1,
+    setCurrentPage: () => {},
+    pageCount: 0,
+    setPageCount: () => {},
     searchQuery: "",
     setSearchQuery: () => {},
-    getData: async () => {},
+    getMovieData: async () => {},
     getSearchData: async () => {},
 });
+
+const getDataByType = {
+    popular: getPopularMovies,
+    top_rated: getTopRatedMovies,
+    trending: getTrendingMovies,
+};
 
 export const MovieProvider = ({ children }) => {
     const [movies, setMovies] = useState({});
     const [searchQuery, setSearchQuery] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageCount, setPageCount] = useState(0);
 
-    const getData = async (typeId) => {
-        if (typeof typeId === "string") {
-            if (typeId === "popular") {
-                const { results } = await getPopularMovies();
-                setMovies((prevState) => ({
-                    ...prevState,
-                    popular: results,
-                }));
-            } else if (typeId === "top_rated") {
-                const { results } = await getTopRatedMovies();
-                setMovies((prevState) => ({
-                    ...prevState,
-                    top_rated: results,
-                }));
-            } else if (typeId === "trending") {
-                const { results } = await getTrendingMovies();
-                setMovies((prevState) => ({
-                    ...prevState,
-                    trending: results,
-                }));
-            }
-        }
-        if (typeof typeId === "number") {
-            const data = await getMovieById(typeId);
-            setMovies((prevState) => ({
-                ...prevState,
-                movie: data,
-            }));
-        }
-    };
-    const getSearchData = async function (query) {
-        const { results, page, total_results, total_pages } =
-            await getSearchResults(query);
-        console.log(page, total_results, total_pages);
+    const getMovieData = async (type) => {
+        const getData = getDataByType[type];
+        const { results, total_pages: totalPages } = await getData(currentPage);
+        setPageCount(totalPages);
         setMovies((prevState) => ({
             ...prevState,
+            [type]: results,
+        }));
+    };
+    const getDataById = async (id) => {
+        const data = await getMovieById(id);
+        setMovies((prevState) => ({
+            ...prevState,
+            movie: data,
+        }));
+    };
+    const getSearchData = async function (query) {
+        const {
+            results,
+            total_pages: totalPages,
+            total_results: totalResults,
+        } = await getSearchResults(query, currentPage);
+        setPageCount(totalPages);
+        setMovies((prevState) => ({
+            ...prevState,
+            totalResults: totalResults,
             searchResults: results,
         }));
     };
@@ -65,7 +67,11 @@ export const MovieProvider = ({ children }) => {
         searchQuery,
         setSearchQuery,
         setMovies,
-        getData,
+        getMovieData,
+        pageCount,
+        setCurrentPage,
+        currentPage,
+        getDataById,
     };
     return (
         <MovieContext.Provider value={value}>{children}</MovieContext.Provider>

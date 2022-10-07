@@ -79,13 +79,17 @@
             @include navbar-tooltip;
             @include navbar-tooltip-hidden;
             transform: translate(50%, 1.2rem);
-            left: -10rem;
-            top: 6rem;
-            ul {
+            left: -4.5rem;
+            top: 1rem;
+            &__list {
                 list-style: none;
-                li {
-                    padding: 0.5rem 0.8rem;
-                }
+            }
+            &__item {
+                padding: 0.5rem 0.8rem;
+            }
+            &__link {
+                text-decoration: none;
+                color: rgba($color-secondary-light, 0.8);
             }
         }
         &:hover .user-info {

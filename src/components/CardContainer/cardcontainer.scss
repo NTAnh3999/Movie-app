@@ -1,5 +1,4 @@
 .card-container {
-    grid-column: 2 / 3;
     margin: 2rem 0;
     @include respond(small) {
         margin: 1.5rem;

@@ -31,10 +31,9 @@ const SignupForm = () => {
                 email,
                 password
             );
-            await createUserDocumentFromAuth(
-                user,
-                `Anonymous ${generateRandomNumber()}`
-            );
+            await createUserDocumentFromAuth(user, {
+                displayName: `Anonymous ${generateRandomNumber()}`,
+            });
 
             //reset form fields
             setFormFields(defaultFormFields);

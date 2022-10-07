@@ -9,7 +9,7 @@ import Modal from "../Modal";
 const MovieCard = (props) => {
     const { id, title, image, releaseDate, voteAverage } = props;
     const movieContext = useContext(MovieContext);
-    const { movies, getData } = movieContext;
+    const { movies, getDataById } = movieContext;
     const [isOpenModal, setIsOpenModal] = useState(false);
     const toggleModal = () => setIsOpenModal(!isOpenModal);
     return (
@@ -17,9 +17,7 @@ const MovieCard = (props) => {
             <div
                 className="movie-card"
                 onClick={async () => {
-                    console.log(`ID of item is ${id}`);
-                    await getData(id);
-
+                    await getDataById(id);
                     toggleModal();
                 }}
             >

@@ -1,0 +1,5 @@
+.section-content {
+    grid-column: 2 / 3;
+    @include flex-column;
+    @include flex-center;
+}

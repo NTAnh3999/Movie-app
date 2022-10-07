@@ -1,21 +1,25 @@
 import { useContext, useEffect } from "react";
 import { MovieContext } from "../context/MovieContext";
-import MovieCard from "../components/MovieCard";
 import CardContainer from "../components/CardContainer";
 import SlideShow from "../components/SlideShow";
 import LoadingSpinner from "../components/LoadingSpinner";
-import { POPULAR_ACTION, TOP_RATED_ACTION, TRENDING_ACTION } from "../config";
-
+import {
+    CATEGORY_POPULAR,
+    CATEGORY_TOP_RATED,
+    CATEGORY_TRENDING,
+} from "../config";
+import CardList from "../components/CardList";
+import Section from "../components/Section";
 const Home = () => {
     const movieContext = useContext(MovieContext);
 
-    const { movies, getData } = movieContext;
+    const { movies, getMovieData } = movieContext;
     useEffect(() => {
         (async () => {
             Promise.all([
-                getData(TRENDING_ACTION),
-                getData(POPULAR_ACTION),
-                getData(TOP_RATED_ACTION),
+                getMovieData(CATEGORY_POPULAR),
+                getMovieData(CATEGORY_TOP_RATED),
+                getMovieData(CATEGORY_TRENDING),
             ]);
         })();
     }, []);
@@ -25,53 +29,24 @@ const Home = () => {
         return (
             <>
                 <SlideShow>
-                    {movies?.trending
-                        ?.filter((_, idx) => idx < 5)
-                        ?.map((movie) => {
-                            return (
-                                <MovieCard
-                                    key={movie.id}
-                                    id={movie.id}
-                                    title={movie.title}
-                                    image={movie.poster_path}
-                                    releaseDate={movie.release_date}
-                                    voteAverage={movie.vote_average}
-                                />
-                            );
-                        })}
+                    <CardList
+                        data={movies?.trending?.filter((_, id) => id < 5)}
+                    />
                 </SlideShow>
-                <CardContainer title="Popupar Movie">
-                    {movies?.popular
-                        ?.filter((_, idx) => idx < 8)
-                        ?.map((movie) => {
-                            return (
-                                <MovieCard
-                                    key={movie.id}
-                                    id={movie.id}
-                                    title={movie.title}
-                                    image={movie.poster_path}
-                                    releaseDate={movie.release_date}
-                                    voteAverage={movie.vote_average}
-                                />
-                            );
-                        })}
-                </CardContainer>
-                <CardContainer title="Top Rated Movie">
-                    {movies?.top_rated
-                        ?.filter((_, idx) => idx < 8)
-                        ?.map((movie) => {
-                            return (
-                                <MovieCard
-                                    key={movie.id}
-                                    id={movie.id}
-                                    title={movie.title}
-                                    image={movie.poster_path}
-                                    releaseDate={movie.release_date}
-                                    voteAverage={movie.vote_average}
-                                />
-                            );
-                        })}
-                </CardContainer>
+                <Section>
+                    <CardContainer title="Popupar Movie">
+                        <CardList
+                            data={movies?.popular?.filter((_, idx) => idx < 8)}
+                        />
+                    </CardContainer>
+                    <CardContainer title="Top Rated Movie">
+                        <CardList
+                            data={movies?.top_rated?.filter(
+                                (_, idx) => idx < 8
+                            )}
+                        />
+                    </CardContainer>
+                </Section>
             </>
         );
     }

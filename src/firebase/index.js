@@ -31,6 +31,7 @@ googleProvider.setCustomParameters({
     prompt: "select_account",
 });
 const auth = getAuth(app);
+
 export const loginWithGooglePopup = function () {
     return signInWithPopup(auth, googleProvider);
 };
@@ -55,12 +56,12 @@ export const loginAuthUserWithEmailAndPassword = async (email, password) => {
     return await signInWithEmailAndPassword(auth, email, password);
 };
 
-export const createUserDocumentFromAuth = async (userAuth, displayName) => {
+export const createUserDocumentFromAuth = async (userAuth, addInfo = {}) => {
     const userDocRef = doc(db, "users", userAuth.uid);
 
     const userSnapshot = await getDoc(userDocRef);
     if (!userSnapshot.exists()) {
-        const { email } = userAuth;
+        const { email, displayName } = userAuth;
         const createdAt = new Date();
 
         try {
@@ -68,9 +69,10 @@ export const createUserDocumentFromAuth = async (userAuth, displayName) => {
                 displayName,
                 email,
                 createdAt,
+                ...addInfo,
             });
         } catch (err) {
-            console.log("fail to create user", err);
+            console.err(err.message);
         }
     }
     return userDocRef;

@@ -1,16 +1,21 @@
-import { API_URL, FEATURE_POPULAR, FEATURE_TOP_RATED } from "../config";
+import {
+    API_URL,
+    GET_POPULAR_URL,
+    GET_TOP_RATED_URL,
+    GET_TRENDING_URL,
+    GET_SEARCH_URL,
+} from "../config";
 
-export const getPopularMovies = async function () {
+export const getPopularMovies = async function (page = 1) {
     try {
-        const res = await fetch(
-            `${API_URL}/movie/${FEATURE_POPULAR}?api_key=${process.env.REACT_APP_API_KEY}`
-        );
+        const res = await fetch(`${GET_POPULAR_URL}&page=${page}`);
         const data = await res.json();
         return data;
     } catch (err) {
         console.error(err);
     }
 };
+
 export const getMovieById = async function (id) {
     try {
         const res = await fetch(
@@ -22,10 +27,19 @@ export const getMovieById = async function (id) {
         console.error(err);
     }
 };
-export const getTopRatedMovies = async function () {
+export const getTopRatedMovies = async function (page = 1) {
+    try {
+        const res = await fetch(`${GET_TOP_RATED_URL}&page=${page}`);
+        const data = await res.json();
+        return data;
+    } catch (err) {
+        console.error(err);
+    }
+};
+export const getSearchResults = async function (query, page = 1) {
     try {
         const res = await fetch(
-            `${API_URL}/movie/${FEATURE_TOP_RATED}?api_key=${process.env.REACT_APP_API_KEY}`
+            `${GET_SEARCH_URL}&query=${query}&page=${page}`
         );
         const data = await res.json();
         return data;
@@ -33,22 +47,9 @@ export const getTopRatedMovies = async function () {
         console.error(err);
     }
 };
-export const getSearchResults = async function (query) {
+export const getTrendingMovies = async function (page = 1) {
     try {
-        const res = await fetch(
-            `${API_URL}/search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${query}`
-        );
-        const data = await res.json();
-        return data;
-    } catch (err) {
-        console.error(err);
-    }
-};
-export const getTrendingMovies = async function () {
-    try {
-        const res = await fetch(
-            `${API_URL}/trending/movie/week?api_key=${process.env.REACT_APP_API_KEY}`
-        );
+        const res = await fetch(`${GET_TRENDING_URL}&page=${page}`);
         const data = await res.json();
         return data;
     } catch (err) {

@@ -60,17 +60,29 @@ const NavBar = () => {
                                 className="avatar"
                             />
                             <span className="user-info">
-                                <ul>
-                                    <li>
-                                        <Link to="/account-info">
+                                <ul className="user-info__list">
+                                    <li className="user-info__item">
+                                        <Link
+                                            className="user-info__link"
+                                            to="/account-info"
+                                        >
                                             Account information
                                         </Link>
                                     </li>
-                                    <li>
-                                        <Link to="/wishlist">Wishlist</Link>
+                                    <li className="user-info__item">
+                                        <Link
+                                            className="user-info__link"
+                                            to="/wishlist"
+                                        >
+                                            Wishlist
+                                        </Link>
                                     </li>
-                                    <li>
-                                        <Link to="/" onClick={SignOutUser}>
+                                    <li className="user-info__item">
+                                        <Link
+                                            className="user-info__link"
+                                            to="/"
+                                            onClick={SignOutUser}
+                                        >
                                             Sign Out
                                         </Link>
                                     </li>
