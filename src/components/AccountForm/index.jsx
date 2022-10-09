@@ -1,9 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import LoginForm from "../LoginForm";
 import SignupForm from "../SignupForm";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
 const AccountForm = () => {
+    const { setMessage } = useContext(UserContext);
     const [isLoginForm, setIsLoginForm] = useState(true);
+    const handleToggleForm = function () {
+        setIsLoginForm(!isLoginForm);
+        setMessage({
+            general: "",
+            usernameInput: "",
+            passwordInput: "",
+            confirmPassInput: "",
+        });
+    };
     return (
         <section className="form-container">
             <Link className="btn--link" to="/">
@@ -15,7 +26,7 @@ const AccountForm = () => {
                         className={`btn btn--underline ${
                             isLoginForm ? "active" : ""
                         }`}
-                        onClick={() => setIsLoginForm(true)}
+                        onClick={() => handleToggleForm()}
                     >
                         Login
                     </button>
@@ -23,7 +34,7 @@ const AccountForm = () => {
                         className={`btn btn--underline ${
                             isLoginForm ? "" : "active"
                         }`}
-                        onClick={() => setIsLoginForm(false)}
+                        onClick={() => handleToggleForm()}
                     >
                         Sign Up
                     </button>

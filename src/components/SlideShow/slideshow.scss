@@ -1,9 +1,8 @@
 .slideshow-container {
     grid-column: full-start / full-end;
 
-    height: 33rem;
+    height: 36rem;
     overflow-x: auto;
-    overflow-y: hidden;
     padding: 1.5rem 1rem;
     @include respond(medium) {
         padding: 1rem 0.5rem;

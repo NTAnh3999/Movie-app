@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 import { MovieContext } from "../../context/MovieContext";
 import Modal from "../Modal";
+import LazyLoad from "react-lazyload";
 const MovieCard = (props) => {
     const { id, title, image, releaseDate, voteAverage } = props;
     const movieContext = useContext(MovieContext);
@@ -24,12 +25,13 @@ const MovieCard = (props) => {
                 <span className="bookmark">
                     <FontAwesomeIcon icon={faBookmark} />
                 </span>
-                <img
-                    className="card-image"
-                    src={image ? `${IMAGE_URL}${image}` : notFoundImg}
-                    alt={`${title}`}
-                />
-
+                <LazyLoad height={200}>
+                    <img
+                        className="card-image"
+                        src={image ? `${IMAGE_URL}${image}` : notFoundImg}
+                        alt={`${title}`}
+                    />
+                </LazyLoad>
                 <div className="card-desc">
                     <h3 className="title">{title}</h3>
                     <div className="details">

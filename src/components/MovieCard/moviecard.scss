@@ -1,6 +1,6 @@
 .movie-card {
     min-width: 28rem;
-    height: 25rem;
+    height: 27rem;
     background-color: rgba($color-primary-dark, 0.7);
     border-radius: 5px;
     overflow: hidden;
@@ -27,11 +27,13 @@
             color: $color-white;
         }
     }
-    .card-image {
+    .lazyload-wrapper {
         width: 100%;
-
-        background-position: center;
-        background-size: cover;
+        height: 100%;
+        .card-image {
+            width: inherit;
+            height: inherit;
+        }
     }
 
     .card-desc {
@@ -67,6 +69,7 @@
     &:hover .bookmark {
         @include visible-item;
     }
+
     &:hover .card-image {
         filter: blur(1.5px);
     }

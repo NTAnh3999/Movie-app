@@ -41,18 +41,10 @@ export const SignOutUser = async () => await signOut(auth);
 export const onAuthStateChangedListener = (callback) =>
     onAuthStateChanged(auth, callback);
 export const createAuthUserFromEmailAndPassword = async (email, password) => {
-    if (!email || !password) {
-        alert("Email and password are required");
-        return;
-    }
     return await createUserWithEmailAndPassword(auth, email, password);
 };
 
 export const loginAuthUserWithEmailAndPassword = async (email, password) => {
-    if (!email || !password) {
-        alert("Email and password are required");
-        return;
-    }
     return await signInWithEmailAndPassword(auth, email, password);
 };
 

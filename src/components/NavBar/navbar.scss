@@ -95,6 +95,9 @@
         &:hover .user-info {
             @include navbar-tooltip-visible;
             transform: translate(11rem, 1.2rem);
+            @include respond(medium) {
+                transform: translate(-10rem, 4.2rem);
+            }
         }
     }
 

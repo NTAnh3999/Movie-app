@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FormInput from "../FormInput";
@@ -7,7 +7,12 @@ import {
     loginWithGooglePopup,
     loginAuthUserWithEmailAndPassword,
 } from "../../firebase";
+import FormMessage from "../FormMessage";
+import { UserContext } from "../../context/UserContext";
+
 const LoginForm = () => {
+    const { message, setMessage } = useContext(UserContext);
+
     const [formFields, setFormFields] = useState({
         email: "",
         password: "",
@@ -28,56 +33,88 @@ const LoginForm = () => {
             navigate("/");
         } catch (error) {
             const errorMessage = error.message;
-            console.error(errorMessage);
+            setMessage({ ...message, general: errorMessage });
         }
     }
     async function handleSubmit(e) {
         e.preventDefault();
-        try {
-            await loginAuthUserWithEmailAndPassword(email, password);
-            setFormFields({ email: "", password: "" });
-            navigate("/");
-        } catch (err) {
-            if (err.code === "auth/wrong-password") {
-                alert("Wrong password");
-            }
-            if (err.code === "auth/user-not-found") {
-                alert("User not found");
+        if (!email || !password) {
+            const errorMessage = "Field is required";
+            !email &&
+                setMessage((prevState) => ({
+                    ...prevState,
+                    usernameInput: errorMessage,
+                }));
+
+            !password &&
+                setMessage((prevState) => ({
+                    ...prevState,
+                    passwordInput: errorMessage,
+                }));
+        } else {
+            try {
+                await loginAuthUserWithEmailAndPassword(email, password);
+                setFormFields({ email: "", password: "" });
+                navigate("/");
+            } catch (err) {
+                if (err.code === "auth/wrong-password") {
+                    setMessage({
+                        passwordInput: "Wrong password",
+                    });
+                }
+                if (err.code === "auth/user-not-found") {
+                    setMessage({
+                        usernameInput: "User not found",
+                    });
+                }
             }
         }
     }
     return (
         <form className="form-login" onSubmit={handleSubmit}>
-            <div className="form__title">
-                <h2 className="heading-2">Login</h2>
-            </div>
             <FormInput
                 inputName="email"
+                labelName="Email or Username"
                 typeName="text"
                 value={email}
                 onChange={handleInput}
             />
+            {message.usernameInput && (
+                <FormMessage type="error" message={message.usernameInput} />
+            )}
             <FormInput
                 inputName="password"
+                labelName="Password"
                 typeName="password"
                 value={password}
                 onChange={handleInput}
             />
-
-            <Link to="/" className="btn--link">
-                Forgot password?
-            </Link>
-            <button className="btn btn-full-width">login</button>
+            {message.passwordInput && (
+                <FormMessage type="error" message={message.passwordInput} />
+            )}
+            <div>
+                <Link to="/forgot-password" className="btn--link">
+                    Forgot password?
+                </Link>
+            </div>
+            <div className="btn-wrapper">
+                <button className="btn btn--submit">login</button>
+            </div>
+            {message.general && (
+                <FormMessage type="error" message={message.general} />
+            )}
             <div className="divide-login">OR</div>
             <div className="btn-group">
                 <button
                     className="btn btn-google"
                     onClick={handleLoginWithGoogle}
                 >
-                    <FontAwesomeIcon icon={faGoogle} /> Google
+                    <FontAwesomeIcon icon={faGoogle} />
+                    Google
                 </button>
                 <button className="btn btn-facebook">
-                    <FontAwesomeIcon icon={faFacebook} /> Facebook
+                    <FontAwesomeIcon icon={faFacebook} />
+                    Facebook
                 </button>
             </div>
         </form>

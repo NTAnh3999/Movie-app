@@ -1,0 +1,12 @@
+.error,
+.success {
+    display: inline-block;
+    margin-top: -1rem;
+    font-size: 1.6rem;
+}
+.error {
+    color: orangered;
+}
+.success {
+    color: lightgreen;
+}

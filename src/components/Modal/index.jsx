@@ -14,6 +14,7 @@ const Modal = ({ toggleModal, movie }) => {
     } = movie;
     return (
         <div className="modal">
+            <div className="overlay" onClick={() => toggleModal()}></div>
             <div className="modal__content">
                 <div className="modal__left">
                     <img

@@ -3,15 +3,16 @@
         margin-top: 2.5rem;
     }
     &__label,
-    &__input,
-    &__input::placeholder {
+    &__input {
         color: $color-white;
-        font-size: 2rem;
+        font-size: 1.8rem;
+        @include respond(medium) {
+            font-size: 2rem;
+        }
     }
     &__label {
-        text-transform: capitalize;
         display: inline-block;
-        transform: translate(1rem, -4.5rem);
+        transform: translate(1rem, -3rem);
         user-select: none;
         transition: all 0.3s;
     }
@@ -19,7 +20,6 @@
         display: block;
         width: 100%;
         padding: 0.5rem 1rem;
-        margin: 1.5rem 0;
         background-color: transparent;
         border: none;
         border-bottom: 2px solid $color-secondary-dark;
@@ -28,9 +28,9 @@
         outline: none;
     }
     &__input:focus ~ &__label {
-        transform: translate(0, -6.8rem);
+        transform: translate(0, -5.8rem);
     }
     .shrink {
-        transform: translate(0, -6.8rem);
+        transform: translate(0, -5.8rem);
     }
 }

@@ -13,6 +13,7 @@
 @import "./components/FormInput/forminput";
 @import "./components/AccountForm/accountform";
 @import "./components/Pagination/pagination";
+@import "./components/FormMessage/formmessage";
 
 * {
     padding: 0;
@@ -36,11 +37,15 @@ body {
 #root {
     display: grid;
     grid-template-rows: 5rem max-content;
-    grid-template-columns: [sidebar-start] 7rem [sidebar-end full-start] 90vw [full-end];
+    grid-template-columns:
+        [sidebar-start] 7rem [sidebar-end full-start] calc(98vw - 11rem)
+        [full-end];
     gap: 5rem 4rem;
+
     @include respond(medium) {
         grid-template-rows: repeat(2, minmax(5rem, min-content)) max-content;
-        grid-template-columns: [full-start] 100vw [full-end];
+        grid-template-columns: [full-start] 98vw [full-end];
         gap: 5rem 0;
+        overflow-x: hidden;
     }
 }

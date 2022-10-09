@@ -1,6 +1,6 @@
 import React from "react";
 
-const FormInput = ({ inputName, typeName, ...otherProps }) => {
+const FormInput = ({ inputName, labelName, typeName, ...otherProps }) => {
     return (
         <div className="form__group">
             <input
@@ -15,7 +15,7 @@ const FormInput = ({ inputName, typeName, ...otherProps }) => {
                     otherProps?.value?.length ? "shrink" : " "
                 }`}
             >
-                {inputName.replace("P", " p")}
+                {labelName}
             </label>
         </div>
     );
