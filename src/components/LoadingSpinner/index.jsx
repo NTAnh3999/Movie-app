@@ -1,12 +1,6 @@
 import loadingImg from "../../assets/Spin-1s-300px.gif";
 const LoadingSpinner = () => {
-    return (
-        <>
-            <div className="loading-spinner-container">
-                <img src={loadingImg} alt="Loading spinner" />
-            </div>
-        </>
-    );
+  return <img src={loadingImg} alt="Loading spinner" />;
 };
 
 export default LoadingSpinner;
