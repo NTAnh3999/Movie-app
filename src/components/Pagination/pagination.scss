@@ -1,37 +1,41 @@
 .pagination {
-    display: flex;
-    background-color: $color-primary-light;
-    border-radius: 1rem;
+  display: flex;
+  background-color: $color-primary-light;
+  border-radius: 1rem;
 
-    .page-item {
-        height: 100%;
+  .page-item {
+    height: 100%;
 
-        padding: 1.5rem 1.2rem;
-        font-size: 1.4rem;
-        list-style: none;
-        border-radius: 0.8rem;
-        cursor: pointer;
-        user-select: none;
-        @include respond(small) {
-            padding: 1rem 0.6rem;
-            font-size: 1.3rem;
-        }
-        @include flex-center;
-        &:first-child,
-        &:last-child {
-            flex-grow: 1;
-            text-align: center;
-        }
-
-        &:hover {
-            background-color: $color-purple-light;
-        }
-        .page-link {
-            color: $color-black;
-            font-size: 1.6rem;
-        }
+    font-size: 1.4rem;
+    list-style: none;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    user-select: none;
+    @include respond(small) {
+      padding: 1rem 0.6rem;
+      font-size: 1.3rem;
     }
-    .active {
-        background-color: $color-secondary-light;
+
+    &:first-child,
+    &:last-child {
+      flex-grow: 1;
+      text-align: center;
     }
+
+    &:hover {
+      background-color: $color-purple-light;
+    }
+    .page-link {
+      display: block;
+      width: inherit;
+      height: inherit;
+
+      padding: 1.5rem 1.2rem;
+      color: $color-black;
+      font-size: 1.6rem;
+    }
+  }
+  .active {
+    background-color: $color-secondary-light;
+  }
 }
