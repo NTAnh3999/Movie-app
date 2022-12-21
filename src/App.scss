@@ -1,51 +1,51 @@
-@import "./assets/colors";
+@import "./assets/variables";
 @import "./assets/mixins";
 
-@import "./components/CardContainer/cardcontainer";
-@import "./components/LoadingSpinner/loadingspinner";
-@import "./components/MovieCard/moviecard";
+@import "./components/CardContainer/card-container";
+@import "./components/LoadingSpinner/loading-spinner";
+@import "./components/MovieCard/movie-card";
 @import "./components/NavBar/navbar";
-@import "./components//SearchBox/searchbox";
-@import "./components/NotFound/notfound";
+@import "./components//SearchBox/search-box";
+@import "./components/NotFound/not-found";
 @import "./components/SlideShow/slideshow";
 @import "./components/Modal/modal";
 @import "./components/Section/section";
-@import "./components/FormInput/forminput";
-@import "./components/AccountForm/accountform";
+@import "./components/FormInput/form-input";
+@import "./components/AccountForm/account-form";
 @import "./components/Pagination/pagination";
-@import "./components/FormMessage/formmessage";
+@import "./components/FormMessage/form-message";
 
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 html {
-    font-size: 62.5%;
-    @include respond(medium) {
-        font-size: 50%;
-    }
-    @include respond(X-small) {
-        font-size: 37.5%;
-    }
+  font-size: 62.5%;
+  @include respond(medium) {
+    font-size: 50%;
+  }
+  @include respond(X-small) {
+    font-size: 37.5%;
+  }
 }
 body {
-    background: $color-black;
-    font-family: "Nutito", sans-serif;
+  background: $color-black;
+  font-family: "Nutito", sans-serif;
 }
 
 #root {
-    display: grid;
-    grid-template-rows: 5rem max-content;
-    grid-template-columns:
-        [sidebar-start] 7rem [sidebar-end full-start] calc(98vw - 11rem)
-        [full-end];
-    gap: 5rem 4rem;
+  display: grid;
+  grid-template-rows: 5rem max-content;
+  grid-template-columns:
+    [sidebar-start] 7rem [sidebar-end full-start] calc(98vw - 11rem)
+    [full-end];
+  gap: 5rem 4rem;
 
-    @include respond(medium) {
-        grid-template-rows: repeat(2, minmax(5rem, min-content)) max-content;
-        grid-template-columns: [full-start] 98vw [full-end];
-        gap: 5rem 0;
-        overflow-x: hidden;
-    }
+  @include respond(medium) {
+    grid-template-rows: repeat(2, minmax(5rem, min-content)) max-content;
+    grid-template-columns: [full-start] 98vw [full-end];
+    gap: 5rem 0;
+    overflow-x: hidden;
+  }
 }
