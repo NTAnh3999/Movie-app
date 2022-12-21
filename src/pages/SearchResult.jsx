@@ -5,27 +5,33 @@ import CardList from "../components/CardList";
 import { useParams } from "react-router-dom";
 import Section from "../components/Section";
 import Pagination from "../components/Pagination";
-
+import SearchBox from "../components/SearchBox";
+import { useRef } from "react";
 const SearchResult = () => {
-    const { movies, getSearchData, pageCount, currentPage } =
-        useContext(MovieContext);
-    const { query } = useParams();
-    useEffect(() => {
-        (async () => {
-            await getSearchData(query);
-        })();
-    }, [query, currentPage]);
+  const { movies, setSearchData, searchResult, currentPage } =
+    useContext(MovieContext);
+  const sectionRef = useRef();
+  const { query } = useParams();
+  useEffect(() => {
+    (async () => {
+      await setSearchData(query);
+    })();
+    sectionRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [query, currentPage]);
 
-    return (
-        <Section>
-            <CardContainer
-                title={`Found ${movies.totalResults} results for '${query}' keyword`}
-            >
-                {<CardList data={movies.searchResults} />}
-            </CardContainer>
-            <Pagination totalPages={pageCount} />
-        </Section>
-    );
+  return (
+    <>
+      <SearchBox />
+      <Section sectionRef={sectionRef}>
+        <CardContainer
+          title={`Found ${searchResult.totalResults} results for '${query}' keyword`}
+        >
+          {<CardList data={movies.searchResults} />}
+        </CardContainer>
+        <Pagination totalPages={searchResult.totalPages} />
+      </Section>
+    </>
+  );
 };
 
 export default SearchResult;
