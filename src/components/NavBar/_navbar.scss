@@ -1,159 +1,150 @@
-.nav-container {
-    grid-column: 1 / 2;
-
-    background-color: $color-primary-dark;
-    border-radius: 1rem;
-    padding: 1.8rem 0;
-    margin-top: 2rem;
-    position: sticky;
-    top: 0;
-    left: 1.5rem;
-    z-index: 100;
-
-    min-height: 35rem;
-
-    @include respond(medium) {
-        grid-row: 1 / 2;
-        position: unset;
-        min-height: 7rem;
-        padding: 0.5rem 1.5rem;
-    }
+.navbar-container {
+  width: auto;
+  grid-row: 1/2;
+  grid-column: 1 / -1;
 }
-.nav-bar {
-    height: 100%;
-    @include flex-column;
-    justify-content: space-around;
-    align-items: center;
-    @include respond(medium) {
-        @include flex-row;
-        justify-content: space-between;
+.navbar {
+  width: 80%;
+  margin: 0 auto;
+  padding: 1.8rem 0;
+  @include flex(row);
+  min-height: 5rem;
+  .list-container {
+    flex-grow: 1;
+    @include flex(row, space-between, center);
+  }
+
+  &__item {
+    position: relative;
+  }
+  &__item:hover > .dropdown {
+    visibility: visible;
+    opacity: 1;
+  }
+  &__list {
+    @include flex(row, center, center);
+  }
+
+  &__link,
+  &__combo-button a {
+    padding: 1rem;
+    color: white;
+    text-decoration: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    &:hover {
+      color: rgba($color-secondary-light, 0.8);
+    }
+  }
+  &__link {
+    .title {
+      padding-right: 3px;
+    }
+  }
+  .active {
+    color: rgba($color-secondary-light, 0.8);
+  }
+  .sign-up {
+    background-color: $color-secondary;
+    border-radius: 8px;
+    &:hover {
+      color: rgba($color-secondary-light, 0.5);
+    }
+  }
+  &__user {
+    @include flex(row, center, center);
+  }
+  &__logo {
+    padding-right: 1.5rem;
+  }
+  &__button {
+    margin-left: auto;
+    width: 6rem;
+    height: 6rem;
+    cursor: pointer;
+    display: none;
+  }
+
+  &__icon {
+    position: relative;
+    margin-top: 3.5rem;
+
+    &,
+    &::before,
+    &::after {
+      width: 3rem;
+      height: 2px;
+      background-color: $color-primary-dark;
+      display: inline-block;
     }
 
-    .logo {
-        font-size: 1.8rem;
-        color: $color-primary-light;
-        @include flex-column;
-
-        svg:first-child {
-            font-size: 2.5rem;
-            transform: translateY(3px);
-        }
-        @include respond(medium) {
-            font-size: 2.5rem;
-            svg:first-child {
-                font-size: 3rem;
-            }
-        }
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      transition: all 0.2s;
     }
-    .account {
-        display: inline-block;
-        padding: 1rem;
-        border-radius: 47%;
-        background-color: $color-white;
-        color: $color-black;
-        font-size: 2rem;
-        .title {
-            @include navbar-tooltip;
-            @include navbar-tooltip-hidden;
-        }
-        &:hover .title {
-            @include navbar-tooltip-visible;
-        }
+    &::before {
+      top: 1rem;
     }
-    .user {
-        position: relative;
-        .avatar {
-            width: 5.5rem;
-            border: 1px solid $color-purple-light;
-            border-radius: 50%;
-            transition: all 0.3s;
-            cursor: pointer;
-            &:hover {
-                transform: scale(1.02);
-            }
-            @include respond(medium) {
-                width: 6rem;
-            }
-        }
-        .user-info {
-            @include navbar-tooltip;
-            @include navbar-tooltip-hidden;
-            transform: translate(50%, 1.2rem);
-            left: -4.5rem;
-            top: 1rem;
-            &__list {
-                list-style: none;
-            }
-            &__item {
-                padding: 0.5rem 0.8rem;
-            }
-            &__link {
-                text-decoration: none;
-                color: rgba($color-secondary-light, 0.8);
-            }
-        }
-        &:hover .user-info {
-            @include navbar-tooltip-visible;
-            transform: translate(11rem, 1.2rem);
-            @include respond(medium) {
-                transform: translate(-10rem, 4.2rem);
-            }
-        }
+    &::after {
+      top: -1rem;
     }
-
-    .nav-list {
-        @include flex-column;
-        @include respond(medium) {
-            @include flex-row;
-            justify-self: center;
-        }
-        li {
-            list-style: none;
-            padding: 1rem;
-            .nav-link {
-                @include flex-center;
-                color: $color-black;
-                text-decoration: none;
-                cursor: pointer;
-                @include respond(medium) {
-                    @include flex-row;
-                }
-
-                .icon {
-                    position: relative;
-                    display: block;
-                    font-size: 1.6rem;
-                    padding: 1rem;
-                    @include respond(medium) {
-                        font-size: 2.2rem;
-                    }
-                }
-                .title {
-                    @include navbar-tooltip;
-                    @include navbar-tooltip-hidden;
-
-                    @include respond(medium) {
-                        position: unset;
-                        color: $color-purple-light;
-                        background-color: transparent;
-                        @include navbar-tooltip-visible;
-                    }
-                }
-                &:hover .title {
-                    @include navbar-tooltip-visible;
-                }
-            }
-            .active {
-                color: rgba($color-secondary-light, 0.8);
-                background-color: $color-purple-light;
-                border-radius: 50%;
-                @include respond(medium) {
-                    border-radius: 1rem;
-                    .title {
-                        color: $color-secondary-light;
-                    }
-                }
-            }
-        }
+  }
+  &__icon.active {
+    background-color: transparent;
+    &::before {
+      top: 0;
+      transform: rotate(135deg);
     }
+    &::after {
+      top: 0;
+      transform: rotate(-135deg);
+    }
+  }
+}
+@include respond(small) {
+  .navbar {
+    .list-container {
+      width: 0;
+      height: 0;
+      visibility: hidden;
+      position: fixed;
+      transition: all 0.2s ease-in-out;
+      top: 0;
+      right: 0;
+      z-index: 1500;
+      @include flex(column, flex-start, center);
+      background-color: $color-primary;
+      padding-top: 6rem;
+      &.active {
+        width: 100vw;
+        height: 100vh;
+        visibility: visible;
+      }
+    }
+    &__item:hover > .dropdown {
+      visibility: hidden;
+      opacity: 0;
+    }
+    &__button {
+      display: block;
+      z-index: 1600;
+      &.active {
+        position: fixed;
+        top: 2.7rem;
+        right: 6rem;
+      }
+    }
+    &__list {
+      @include flex(column, center, center);
+      list-style-type: none;
+    }
+    &__link {
+      font-size: 3rem;
+      line-height: 2;
+      padding: 1rem 2.5rem;
+    }
+  }
 }

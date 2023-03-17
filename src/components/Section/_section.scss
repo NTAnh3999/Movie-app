@@ -1,8 +1,5 @@
 .section-content {
-    grid-column: 2 / 3;
-    @include flex-column;
-    @include flex-center;
-    @include respond(medium) {
-        grid-column: full-start / full-end;
-    }
+  @include flex(column, center, center);
+  @include respond(medium) {
+  }
 }

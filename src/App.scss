@@ -14,7 +14,7 @@
 @import "./components/AccountForm/account-form";
 @import "./components/Pagination/pagination";
 @import "./components/FormMessage/form-message";
-
+@import "./components/Dropdown/dropdown";
 * {
   padding: 0;
   margin: 0;
@@ -34,18 +34,12 @@ body {
   font-family: "Nutito", sans-serif;
 }
 
-#root {
-  display: grid;
-  grid-template-rows: 5rem max-content;
-  grid-template-columns:
-    [sidebar-start] 7rem [sidebar-end full-start] calc(98vw - 11rem)
-    [full-end];
-  gap: 5rem 4rem;
+// #root {
 
-  @include respond(medium) {
-    grid-template-rows: repeat(2, minmax(5rem, min-content)) max-content;
-    grid-template-columns: [full-start] 98vw [full-end];
-    gap: 5rem 0;
-    overflow-x: hidden;
-  }
-}
+//   // @include respond(medium) {
+//   //   grid-template-rows: repeat(2, minmax(5rem, min-content)) max-content;
+//   //   grid-template-columns: [full-start] 98vw [full-end];
+//   //   gap: 5rem 0;
+//   //   overflow-x: hidden;
+//   // }
+// }
