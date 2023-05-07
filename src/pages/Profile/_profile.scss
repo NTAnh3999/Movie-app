@@ -1,0 +1,52 @@
+.profile {
+  &__section {
+    width: auto;
+    margin: 10rem 0;
+    background: linear-gradient(
+      to bottom,
+      $color-primary-dark,
+      $color-black 95%
+    );
+  }
+  &__title {
+    width: 50%;
+    font-size: 2.8rem;
+    color: $color-white;
+    margin: 0 auto 7rem;
+  }
+  &__content {
+    width: 50%;
+    margin: 0 auto;
+    border: 2px solid $color-purple-light;
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+  &__avatar {
+    width: max-content;
+    @include flex(column, center, center);
+    img {
+      width: 10rem;
+      border-radius: 100%;
+      padding-bottom: 1rem;
+    }
+  }
+  &__form {
+    @include flex(column, center, flex-start);
+    margin: 2rem 0;
+    button {
+      font-size: 1.4rem;
+    }
+    h4 {
+      width: 100%;
+      color: $color-primary-light;
+      font-size: 1.8rem;
+      border-top: 2px solid $color-purple-light;
+      padding: 2rem 0;
+    }
+  }
+  &__input {
+    padding: 0.5rem 0.8rem;
+    outline: none;
+    font-size: 1.6rem;
+  }
+}

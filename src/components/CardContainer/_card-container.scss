@@ -1,31 +1,32 @@
 .card-container {
-    width: 100%;
-    margin: 2rem 0;
-    @include respond(small) {
-        margin: 1.5rem;
-    }
+  width: auto;
+  margin: 2rem 0;
+  padding: 0 2rem;
+  @include respond(small) {
+    margin: 1.5rem;
+  }
+  @include respond(medium) {
+    margin: 1rem;
+    padding: 2rem;
+  }
+
+  .section-title {
+    color: $color-primary-light;
+    font-size: 2.8rem;
+    padding-bottom: 1.5rem;
+  }
+  .card-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(34rem, 1fr));
+    gap: 3.5rem 2.5rem;
+
     @include respond(medium) {
-        grid-column: 1 / -1;
-        margin: 1rem;
-        padding: 2rem;
+      gap: 2.5rem 1.5rem;
+      padding: 0;
     }
-
-    .section-title {
-        @include section-title;
+    @include respond(small) {
+      grid-template-columns: 1fr;
+      gap: 5.5rem 0;
     }
-    .card-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(34rem, 1fr));
-        gap: 3.5rem 2.5rem;
-        padding: 1.5rem;
-
-        @include respond(medium) {
-            gap: 2.5rem 1.5rem;
-            padding: 0;
-        }
-        @include respond(small) {
-            grid-template-columns: 1fr;
-            gap: 5.5rem 0;
-        }
-    }
+  }
 }

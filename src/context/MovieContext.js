@@ -1,76 +1,83 @@
 import { createContext, useState } from "react";
 import {
-  getPopularMovies,
-  getTopRatedMovies,
-  getTrendingMovies,
   getSearchResults,
-  getMovieById,
+  getListMovies,
+  getSimilar,
+  getDataById,
 } from "../services/movies";
+import { useEffect } from "react";
+import { CATEGORY, MOVIE_TYPE } from "../common";
 export const MovieContext = createContext({
   movies: {},
   setMovies: () => {},
   currentPage: 1,
   setCurrentPage: () => {},
-  searchResult: {
+  search: {
+    results: [],
     query: "",
     totalPages: 0,
     totalResults: 0,
   },
-  setSearchResult: () => {},
+  setSearch: () => {},
   setMovieData: async () => {},
   setSearchData: async () => {},
   setMovieDetail: async () => {},
 });
 
-const getDataByCategory = {
-  popular: getPopularMovies,
-  top_rated: getTopRatedMovies,
-  trending: getTrendingMovies,
-};
-
 export const MovieProvider = ({ children }) => {
   const [movies, setMovies] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchResult, setSearchResult] = useState({
+  const [search, setSearch] = useState({
+    results: [],
     query: "",
     totalPages: 0,
     totalResults: 0,
   });
-
-  const setMovieData = async (type) => {
-    const getData = getDataByCategory[type];
-    const { results, total_pages: totalPages } = await getData(currentPage);
-    setSearchResult((prevState) => ({ ...prevState, totalPages }));
-    setMovies((prevState) => ({ ...prevState, [type]: results }));
+  useEffect(() => {
+    Promise.all([
+      getListMovies(MOVIE_TYPE.popular),
+      getListMovies(MOVIE_TYPE.top_rated),
+      getListMovies(MOVIE_TYPE.now_playing),
+    ]).then((data) =>
+      setMovies({
+        popular: data[0].results,
+        top_rated: data[1].results,
+        now_playing: data[2].results,
+      })
+    );
+  }, []);
+  const getSimilarMovies = async (categoryName, id) => {
+    const res = await getSimilar(categoryName, id);
+    setMovies((prevState) => ({ ...prevState, similar: res.results }));
   };
-  const setMovieDetail = async (id) => {
-    const data = await getMovieById(id);
-    setMovies((prevState) => ({ ...prevState, movie: data }));
+  const getMovieDetail = async (categoryName, id) => {
+    const res = await getDataById(categoryName, id);
+    setMovies((prevState) => ({ ...prevState, detail: res }));
   };
   const setSearchData = async function (query) {
     const {
       results,
       total_pages: totalPages,
       total_results: totalResults,
-    } = await getSearchResults(query, currentPage);
-    setSearchResult((prevState) => ({
+    } = await getSearchResults(CATEGORY.movie, { query, page: currentPage });
+    setSearch((prevState) => ({
       ...prevState,
       totalPages,
       totalResults,
+      results,
     }));
-    setMovies((prevState) => ({ ...prevState, searchResults: results }));
   };
-
   const value = {
     movies,
     setSearchData,
-    searchResult,
-    setSearchResult,
+    search,
+    setSearch,
     setMovies,
-    setMovieData,
+
     setCurrentPage,
+    getSimilarMovies,
+    getMovieDetail,
     currentPage,
-    setMovieDetail,
   };
   return (
     <MovieContext.Provider value={value}>{children}</MovieContext.Provider>

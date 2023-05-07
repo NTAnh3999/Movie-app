@@ -1,20 +1,3 @@
-@import "./assets/variables";
-@import "./assets/mixins";
-
-@import "./components/CardContainer/card-container";
-@import "./components/LoadingSpinner/loading-spinner";
-@import "./components/MovieCard/movie-card";
-@import "./components/NavBar/navbar";
-@import "./components//SearchBox/search-box";
-@import "./components/NotFound/not-found";
-@import "./components/SlideShow/slideshow";
-@import "./components/Modal/modal";
-@import "./components/Section/section";
-@import "./components/FormInput/form-input";
-@import "./components/AccountForm/account-form";
-@import "./components/Pagination/pagination";
-@import "./components/FormMessage/form-message";
-@import "./components/Dropdown/dropdown";
 * {
   padding: 0;
   margin: 0;
@@ -30,16 +13,43 @@ html {
   }
 }
 body {
-  background: $color-black;
+  background-color: $color-black;
   font-family: "Nutito", sans-serif;
 }
+a {
+  text-decoration: none;
+}
+.swiper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.swiper-slide {
+  width: 20%;
+  @include respond(large) {
+    width: 33%;
+  }
+  @include respond(medium) {
+    width: 50%;
+  }
+}
 
-// #root {
+.mb-3 {
+  margin-bottom: 3rem;
+}
 
-//   // @include respond(medium) {
-//   //   grid-template-rows: repeat(2, minmax(5rem, min-content)) max-content;
-//   //   grid-template-columns: [full-start] 98vw [full-end];
-//   //   gap: 5rem 0;
-//   //   overflow-x: hidden;
-//   // }
-// }
+.mb-2 {
+  margin-bottom: 2rem;
+}
+
+.section {
+  padding: 0 2rem;
+}
+
+.section__header {
+  @include flex(row, space-between, center);
+  h2 {
+    color: $color-primary-light;
+    font-size: 2.8rem;
+  }
+}

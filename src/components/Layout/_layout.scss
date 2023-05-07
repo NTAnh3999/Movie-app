@@ -1,0 +1,241 @@
+.navbar-container {
+  width: auto;
+}
+.navbar {
+  width: 100%;
+  padding: 1.8rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+
+  @include flex(row, space-between, center);
+  min-height: 5rem;
+  .list-container {
+    @include flex(row, space-between, center);
+  }
+  &__account {
+    position: relative;
+    cursor: pointer;
+    @include flex(row, space-between, center);
+    img {
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 100%;
+    }
+    svg {
+      color: $color-white;
+      font-size: 1.3rem;
+    }
+    .dropdown {
+      position: absolute;
+      background: $color-purple-light;
+      padding: 1rem;
+      border-radius: 2px;
+      top: 100%;
+      left: -30%;
+      @include hidden-item;
+      @include flex(column, center, stretch);
+      &__item {
+        list-style-type: none;
+        color: $color-white;
+        font-size: 1.6rem;
+        padding: 3px 5px;
+        &:hover {
+          background-color: $color-primary-dark;
+          border-radius: 5px;
+        }
+      }
+      &__link {
+        color: $color-white;
+      }
+    }
+    &:hover > .dropdown {
+      @include visible-item;
+    }
+  }
+  &__item {
+    position: relative;
+    list-style-type: none;
+  }
+  &__item:hover > .dropdown {
+    visibility: visible;
+    opacity: 1;
+  }
+  &__list {
+    @include flex(row, center, center);
+  }
+
+  &__link {
+    padding: 1rem;
+    color: white;
+    text-decoration: none;
+    font-size: 2.2rem;
+    cursor: pointer;
+    &:hover {
+      color: rgba($color-secondary-light, 0.8);
+    }
+  }
+  &__link {
+    .title {
+      padding-right: 3px;
+    }
+  }
+  .active {
+    color: rgba($color-secondary-light, 0.8);
+  }
+  .sign-up {
+    background-color: $color-secondary;
+    border-radius: 8px;
+    &:hover {
+      color: rgba($color-secondary-light, 0.5);
+    }
+  }
+  &__user {
+    @include flex(row, center, center);
+  }
+  &__icon {
+    position: relative;
+    margin-top: 3.5rem;
+    &,
+    &::before,
+    &::after {
+      width: 3rem;
+      height: 2px;
+      background-color: $color-secondary-dark;
+      display: inline-block;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      transition: all 0.2s;
+    }
+    &::before {
+      top: 1rem;
+    }
+    &::after {
+      top: -1rem;
+    }
+  }
+  &__icon.active {
+    background-color: transparent;
+    &::before {
+      top: 0;
+      transform: rotate(135deg);
+    }
+    &::after {
+      top: 0;
+      transform: rotate(-135deg);
+    }
+  }
+  &__button {
+    display: none;
+  }
+}
+.navbar.active {
+  animation: shrinkSidebar 0.5s;
+  width: 99vw;
+  height: 8rem;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  background-color: rgba($color: $color-primary-dark, $alpha: 0.9);
+}
+@include respond(small) {
+  .navbar {
+    height: 8rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    background-color: rgba($color: $color-primary-dark, $alpha: 0.7);
+    .list-container {
+      width: 0;
+      height: 0;
+      visibility: hidden;
+      position: fixed;
+      transition: all 0.2s ease-in-out;
+      top: 0;
+      right: 0;
+      z-index: 1500;
+      @include flex(column, flex-start, center);
+      padding-top: 6rem;
+      &.active {
+        background-color: $color-primary;
+        width: 100vw;
+        height: 100vh;
+        visibility: visible;
+      }
+    }
+    &__button {
+      display: block;
+      width: 6rem;
+      height: 6rem;
+      cursor: pointer;
+      &.active {
+        z-index: 1600;
+        position: fixed;
+        top: 1rem;
+        right: 2rem;
+      }
+    }
+    &__list {
+      @include flex(column, center, center);
+      list-style-type: none;
+    }
+    &__link {
+      font-size: 3rem;
+      line-height: 2;
+      padding: 1rem 2.5rem;
+    }
+  }
+}
+//FOOTER STYLES
+.footer {
+  position: relative;
+  padding: 6rem 2rem;
+  background: linear-gradient(
+      0deg,
+      rgba($color: $color-secondary-dark, $alpha: 0.6),
+      rgba($color: $color-black, $alpha: 0.8)
+    ),
+    url("../../assets/images/footer.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  &__content {
+    max-width: 1000px;
+    margin: 0 auto;
+    &__logo {
+      @include flex(row);
+      margin-bottom: 3rem;
+    }
+
+    &__menus {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+
+      @include respond(small) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    &__menu {
+      @include flex(column, flex-start, flex-start);
+      margin-top: 1rem;
+
+      font-size: 1.8rem;
+      font-weight: 600;
+      & > a {
+        color: $color-white;
+        &:hover {
+          color: $color-primary-light;
+        }
+      }
+      & > * ~ * {
+        margin-top: 1rem;
+      }
+    }
+  }
+}

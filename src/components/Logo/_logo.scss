@@ -1,0 +1,15 @@
+.logo-box {
+  @include flex(row, center, center);
+  text-decoration: none;
+  img {
+    width: 7rem;
+    height: 7rem;
+  }
+}
+.logo-box__text {
+  transform: translate(-1rem, 2px);
+  color: $color-secondary-dark;
+  font-size: 1.6rem;
+  clip-path: polygon(100% 0, 100% 38%, 100% 100%, 0 60%, 0 45%);
+  background-color: $color-white;
+}

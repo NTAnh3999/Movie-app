@@ -1,49 +1,63 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { MovieContext } from "../context/MovieContext";
-import CardContainer from "../components/CardContainer";
-import SlideShow from "../components/SlideShow";
-import LoadingSpinner from "../components/LoadingSpinner";
-import {
-  CATEGORY_POPULAR,
-  CATEGORY_TOP_RATED,
-  CATEGORY_TRENDING,
-} from "../config";
+import { CATEGORY, MOVIE_TYPE } from "../common";
+import HeroSlide from "../components/HeroSlide";
+import { Link } from "react-router-dom";
+import Button from "../components/Button";
 import CardList from "../components/CardList";
-import Section from "../components/Section";
-import SearchBox from "../components/SearchBox";
+import Layout from "../components/Layout";
 const Home = () => {
-  const movieContext = useContext(MovieContext);
-
-  const { movies, setMovieData } = movieContext;
-  useEffect(() => {
-    (async () => {
-      Promise.all([
-        setMovieData(CATEGORY_POPULAR),
-        setMovieData(CATEGORY_TOP_RATED),
-        setMovieData(CATEGORY_TRENDING),
-      ]);
-    })();
-  }, []);
-  if (movies.length === 0) {
-    return <LoadingSpinner />;
-  } else {
-    return (
-      <>
-        <SearchBox />
-        <SlideShow>
-          <CardList data={movies?.trending?.filter((_, id) => id < 5)} />
-        </SlideShow>
-        <Section>
-          <CardContainer title="Popupar Movie">
-            <CardList data={movies?.popular?.filter((_, idx) => idx < 8)} />
-          </CardContainer>
-          <CardContainer title="Top Rated Movie">
-            <CardList data={movies?.top_rated?.filter((_, idx) => idx < 8)} />
-          </CardContainer>
-        </Section>
-      </>
-    );
-  }
+  const { movies } = useContext(MovieContext);
+  return (
+    <Layout>
+      <HeroSlide />
+      <section className="mb-3">
+        <div className="section mb-3">
+          <div className="section__header mb-2">
+            <h2>Phim chiếu rạp</h2>
+            <Link to="/movie">
+              <Button className="btn--outline">Xem thêm</Button>
+            </Link>
+          </div>
+          <CardList
+            items={movies?.now_playing}
+            category={CATEGORY.movie}
+            type={MOVIE_TYPE.now_playing}
+          />
+        </div>
+      </section>
+      <section className="mb-3">
+        <div className="section mb-3">
+          <div className="section__header mb-2">
+            <h2>Phim nổi bật</h2>
+            <Link to="/movie">
+              <Button className="btn--outline">Xem thêm</Button>
+            </Link>
+          </div>
+          <CardList
+            items={movies?.popular}
+            category={CATEGORY.movie}
+            type={MOVIE_TYPE.popular}
+          />
+        </div>
+      </section>
+      <section className="mb-3">
+        <div className="section mb-3">
+          <div className="section__header mb-2">
+            <h2>Phim kinh điển</h2>
+            <Link to="/movie">
+              <Button className="btn--outline">Xem thêm</Button>
+            </Link>
+          </div>
+          <CardList
+            items={movies?.top_rated}
+            category={CATEGORY.movie}
+            type={MOVIE_TYPE.top_rated}
+          />
+        </div>
+      </section>
+    </Layout>
+  );
 };
 
 export default Home;

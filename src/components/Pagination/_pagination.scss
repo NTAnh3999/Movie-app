@@ -1,11 +1,20 @@
 .pagination {
-  display: flex;
+  width: 40vw;
+  transform: translateX(80%);
+  @include flex(row, center, center);
   background-color: $color-primary-light;
   border-radius: 1rem;
-
+  @include respond(medium) {
+    width: 60vw;
+    transform: translateX(30%);
+  }
+  @include respond(small) {
+    width: 95vw;
+    transform: translateX(0%);
+    margin: 0 auto;
+  }
   .page-item {
     height: 100%;
-
     font-size: 1.4rem;
     list-style: none;
     border-radius: 0.8rem;

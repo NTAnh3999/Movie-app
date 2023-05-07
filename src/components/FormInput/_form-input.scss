@@ -1,36 +1,36 @@
 .form {
-    &__group {
-        margin-top: 2.5rem;
+  &__group {
+    margin-top: 2.5rem;
+  }
+  &__label,
+  &__input {
+    color: $color-white;
+    font-size: 1.8rem;
+    @include respond(medium) {
+      font-size: 2rem;
     }
-    &__label,
-    &__input {
-        color: $color-white;
-        font-size: 1.8rem;
-        @include respond(medium) {
-            font-size: 2rem;
-        }
+  }
+  &__label {
+    display: inline-block;
+    transform: translate(1rem, -3rem);
+    user-select: none;
+    transition: all 0.3s;
+    &.shrink {
+      transform: translate(0, -5.8rem);
     }
-    &__label {
-        display: inline-block;
-        transform: translate(1rem, -3rem);
-        user-select: none;
-        transition: all 0.3s;
-    }
-    &__input {
-        display: block;
-        width: 100%;
-        padding: 0.5rem 1rem;
-        background-color: transparent;
-        border: none;
-        border-bottom: 2px solid $color-secondary-dark;
-    }
-    &__input:focus {
-        outline: none;
-    }
-    &__input:focus ~ &__label {
-        transform: translate(0, -5.8rem);
-    }
-    .shrink {
-        transform: translate(0, -5.8rem);
-    }
+  }
+  &__input {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid $color-secondary-dark;
+  }
+  &__input:focus {
+    outline: none;
+  }
+  &__input:focus ~ &__label {
+    transform: translate(0, -5.8rem);
+  }
 }

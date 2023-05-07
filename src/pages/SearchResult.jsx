@@ -1,15 +1,15 @@
 import React, { useContext, useEffect } from "react";
 import { MovieContext } from "../context/MovieContext";
 import CardContainer from "../components/CardContainer";
-import CardList from "../components/CardList";
+import CardGrid from "../components/CardGrid";
 import { useParams } from "react-router-dom";
-import Section from "../components/Section";
 import Pagination from "../components/Pagination";
 import SearchBox from "../components/SearchBox";
 import { useRef } from "react";
+import EmptyPage from "../components/Empty";
+import Layout from "../components/Layout";
 const SearchResult = () => {
-  const { movies, setSearchData, searchResult, currentPage } =
-    useContext(MovieContext);
+  const { setSearchData, search, currentPage } = useContext(MovieContext);
   const sectionRef = useRef();
   const { query } = useParams();
   useEffect(() => {
@@ -20,17 +20,21 @@ const SearchResult = () => {
   }, [query, currentPage]);
 
   return (
-    <>
-      <SearchBox />
-      <Section sectionRef={sectionRef}>
+    <Layout>
+      <section style={{ paddingTop: "10rem" }} ref={sectionRef}>
+        <SearchBox />
         <CardContainer
-          title={`Found ${searchResult.totalResults} results for '${query}' keyword`}
+          title={`Found ${search.totalResults} results for '${query}' keyword`}
         >
-          {<CardList data={movies.searchResults} />}
+          {search.results.length !== 0 ? (
+            <CardGrid data={search.results} />
+          ) : (
+            <EmptyPage page="Search Result" />
+          )}
         </CardContainer>
-        <Pagination totalPages={searchResult.totalPages} />
-      </Section>
-    </>
+        <Pagination totalPages={search.totalPages} />
+      </section>
+    </Layout>
   );
 };
 

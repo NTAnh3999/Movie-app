@@ -1,14 +1,19 @@
 .not-found-container {
-    grid-column: full-start / full-end;
-    color: $color-secondary;
-    font-size: 3rem;
-    text-align: center;
-    margin-top: 3rem;
-    a {
-        text-decoration: none;
-        color: brown;
-        &:hover {
-            text-decoration: underline;
-        }
+  color: $color-secondary;
+  font-size: 3rem;
+  text-align: center;
+  margin-top: 3rem;
+  a {
+    text-decoration: none;
+    color: brown;
+    &:hover {
+      text-decoration: underline;
     }
+  }
+}
+.not-found-text {
+  @include flex(column, center, center);
+  span {
+    padding: 2rem 0;
+  }
 }

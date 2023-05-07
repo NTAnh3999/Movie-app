@@ -1,11 +1,13 @@
 .movie-card {
-  min-width: 28rem;
+  width: 35rem;
   height: 27rem;
   background-color: rgba($color-primary-dark, 0.7);
   border-radius: 5px;
   overflow: hidden;
-  cursor: pointer;
   position: relative;
+  @include respond(large) {
+    width: auto;
+  }
   @include respond(small) {
     height: 45rem;
   }
@@ -13,18 +15,21 @@
     position: absolute;
     top: 1rem;
     right: 1rem;
-    z-index: 2;
+    z-index: 4;
 
     width: 3.5rem;
     height: 3.5rem;
     border-radius: 50%;
     background-color: rgba($color-secondary-dark, 0.6);
 
-    @include flex-center;
+    @include flex(row, center, center);
     @include hidden-item;
     svg {
       font-size: 2rem;
       color: $color-white;
+      &:hover path {
+        fill: $color-secondary-light;
+      }
     }
   }
   .lazyload-wrapper {

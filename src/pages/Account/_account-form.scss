@@ -1,0 +1,61 @@
+.form-container {
+  width: 100vw;
+  min-height: 100vh;
+  padding: 2rem;
+  background-image: linear-gradient(
+    to right bottom,
+    rgba($color-purple-light, 0.6),
+    rgba($color-primary, 0.9)
+  );
+  position: relative;
+  overflow-y: auto;
+}
+.form {
+  width: 30vw;
+  height: 55rem;
+  background-color: rgba(#111, 0.3);
+  border-radius: 0.8rem;
+  box-shadow: 0.2rem 0.4rem 0.5rem rgba(#000, 0.15);
+
+  transform: translate(-50%, -40%);
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  overflow: hidden;
+  @include respond(large) {
+    width: 35vw;
+  }
+  @include respond(medium) {
+    width: 50vw;
+    height: 60rem;
+  }
+}
+.form-login,
+.form-signup {
+  padding: 2rem 4rem;
+  @include respond(medium) {
+    padding: 3rem 5rem;
+  }
+}
+.btn .btn-wrapper {
+  max-width: 100%;
+  @include flex(row, center, center);
+}
+.divide-login {
+  display: grid;
+  grid-template-columns: 1fr min-content 1fr;
+  color: $color-white;
+  align-items: center;
+  column-gap: 1rem;
+  margin: 2rem 0;
+}
+.divide-login::before,
+.divide-login::after {
+  content: "";
+  height: 1px;
+  background-color: $color-white;
+}
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+}

@@ -5,16 +5,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 const SearchBox = () => {
-  const { searchResult, setSearchResult } = useContext(MovieContext);
+  const { search, setSearch } = useContext(MovieContext);
   const navigate = useNavigate();
-  const { query } = searchResult;
+  const { query } = search;
   function submitHandle(e) {
     e.preventDefault();
     !query ? navigate("/") : navigate(`/search/${query}`);
   }
   const inputHandle = function (e) {
     const query = e.target.value;
-    setSearchResult((prevState) => ({ ...prevState, query }));
+    setSearch((prevState) => ({ ...prevState, query }));
   };
   return (
     <div className="search-container">

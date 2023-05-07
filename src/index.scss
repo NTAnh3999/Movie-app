@@ -1,0 +1,22 @@
+@import "./assets/scss/animation";
+@import "./assets/scss/mixins";
+@import "./assets/scss/variables";
+
+@import "./components/CardContainer/card-container";
+@import "./components/LoadingSpinner/loading-spinner";
+@import "./components/MovieCard/movie-card";
+@import "./components/Layout/layout";
+@import "./components//SearchBox/search-box";
+@import "./components/NotFound/not-found";
+@import "./components/Modal/modal";
+@import "./components/FormInput/form-input";
+@import "./pages/Account/account-form";
+@import "./components/Pagination/pagination";
+@import "./components/FormMessage/form-message";
+@import "./components/Logo/logo";
+@import "./components/HeroSlide/hero-slide";
+@import "./components/Button/button";
+@import "./pages/Detail/detail";
+@import "./pages/Profile/profile";
+@import "./components/MovieCardPreview/movie-card-preview";
+@import "./App";

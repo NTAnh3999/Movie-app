@@ -1,0 +1,111 @@
+button {
+  cursor: pointer;
+  font-family: $font-family;
+}
+
+.btn {
+  @include btn;
+  &--primary {
+    font-size: 1.8rem;
+    background-color: $color-secondary;
+    &:hover {
+      box-shadow: 0px 0px 5px 10px #ff00004d;
+    }
+  }
+  &--play {
+    position: absolute;
+    background-color: $color-secondary;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 2rem 3.5rem;
+  }
+  &--outline {
+    border: 3px solid $color-white;
+    background-color: transparent;
+    color: $color-white;
+    box-shadow: unset;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    &:hover {
+      box-shadow: unset;
+      color: $color-primary;
+      background-color: $color-white;
+    }
+  }
+  &--google,
+  &--facebook,
+  &--underline,
+  &--submit {
+    box-shadow: unset;
+  }
+  &--underline.active {
+    color: rgba($color-primary-light, 0.5);
+    &::after {
+      transform: scale(1);
+    }
+  }
+
+  &--submit {
+    width: 100%;
+    margin: 1.5rem 0;
+    background-color: $color-secondary-dark;
+    text-transform: uppercase;
+    &:hover {
+      transition: all 1s ease-out;
+      transform: translatey(-4px);
+      box-shadow: 0 4px rgba(#000, 0.05);
+      background-color: $color-white;
+      color: $color-secondary-light;
+    }
+  }
+  &--facebook {
+    background-color: #365899;
+  }
+  &--google {
+    background-color: #ea4335;
+  }
+  &--link:link,
+  &--link:visited {
+    display: inline-block;
+    padding: 1rem 0;
+    color: $color-white;
+    text-decoration: none;
+    font-size: 1.6rem;
+    &:hover {
+      color: rgba($color-secondary-light, 0.8);
+    }
+    @include respond(medium) {
+      padding: 1.5rem 0;
+      font-size: 1.8rem;
+    }
+  }
+  &--underline {
+    width: calc(50% - 2.4rem);
+    background: none;
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+    &::after {
+      content: "";
+      display: inline-block;
+      width: 100%;
+      transform: scale(0);
+      height: 0.4rem;
+      background-color: rgba($color-secondary-dark, 1);
+      transition: all 0.3s ease-in;
+      transform-origin: center;
+    }
+    &:hover::after {
+      transform: scale(1);
+    }
+    &:hover {
+      color: rgba($color-primary-light, 0.5);
+    }
+  }
+}
+
+.btn .btn.small {
+  border-width: 2px;
+  padding: 0.25rem 1.5rem;
+  font-size: 1rem;
+}
