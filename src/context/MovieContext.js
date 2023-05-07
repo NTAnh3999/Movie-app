@@ -73,7 +73,6 @@ export const MovieProvider = ({ children }) => {
     search,
     setSearch,
     setMovies,
-
     setCurrentPage,
     getSimilarMovies,
     getMovieDetail,

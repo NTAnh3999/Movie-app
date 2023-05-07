@@ -10,7 +10,7 @@ const CardGrid = ({ data }) => {
         title={dataField.title}
         image={dataField.poster_path ?? dataField.image}
         releaseDate={dataField.release_date}
-        voteAverage={dataField.vote_average}
+        voteAverage={dataField.vote_average ?? dataField.voteAverage}
       />
     );
   });
